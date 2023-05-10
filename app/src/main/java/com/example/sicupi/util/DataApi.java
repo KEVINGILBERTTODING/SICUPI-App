@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DataApi {
 
-    public static final String IP_ADDRESS ="192.168.100.6";// ip address
+    public static final String IP_ADDRESS ="192.168.41.4";// ip address
     public static final String BASE_URL ="http://" + IP_ADDRESS+"/pegawai/api/";
 
     public static Retrofit retrofit = null;
