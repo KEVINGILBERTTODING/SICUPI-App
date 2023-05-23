@@ -6,4 +6,14 @@
         android:id="@+id/menuHome"
         android:icon="@drawable/baseline_home_24"
         android:title="Home"/>
+
+    <item
+        android:id="@+id/menuPermohonan"
+        android:icon="@drawable/baseline_feed_24"
+        android:title="Permohonan"/>
+
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profil"/>
 </menu>

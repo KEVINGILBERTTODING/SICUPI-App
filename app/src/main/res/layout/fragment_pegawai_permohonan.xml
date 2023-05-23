@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PegawaiFragment.PegawaiHomeFragment">
+    tools:context=".PegawaiFragment.PermohonanFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,23 +20,6 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sistem Cuti Pegawai"
-                android:fontFamily="@font/popmed"
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alvina"
-                android:fontFamily="@font/popsembold"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:id="@+id/tvUsername"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -58,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/popsembold"
-                        android:text="Data Cuti Sakit"
+                        android:text="Cuti Sakit"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -66,63 +48,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/popmed"
-                        android:text="Data cuti sakit kurang dari 14 hari"
+                        android:text="Permohonan cuti sakit kurang dari 14 hari"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotal1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/popsembold"
-                        android:text="23"
-                        android:textColor="@color/black"
-                        android:textSize="30sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardUseCompatPadding="true"
-                app:cardElevation="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="10dp"
-                app:contentPadding="15dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/popsembold"
-                        android:text="Data Cuti Sakit  14 Hari "
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/popmed"
-                        android:text="Data cuti sakit lebih dari 14 hari"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotal2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/popsembold"
-                        android:text="23"
-                        android:textColor="@color/black"
-                        android:textSize="30sp" />
-
                 </LinearLayout>
 
 
@@ -147,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/popsembold"
-                        android:text="Data Cuti Melahirkan "
+                        android:text="Cuti Sakit  14 Hari "
                         android:textColor="@color/black" />
 
                     <TextView
@@ -155,19 +83,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/popmed"
-                        android:text="Data cuti melahirkan"
+                        android:text="Permohonan cuti sakit lebih dari 14 hari"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotal3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/popsembold"
-                        android:text="23"
-                        android:textColor="@color/black"
-                        android:textSize="30sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -190,7 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/popsembold"
-                        android:text="Data Cuti Alasan Penting "
+                        android:text="Cuti Melahirkan "
                         android:textColor="@color/black" />
 
                     <TextView
@@ -198,19 +116,42 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/popmed"
-                        android:text="Data cuti alasan penting"
+                        android:text="Permohonan cuti melahirkan"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvTotal4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/popsembold"
-                        android:text="23"
+                        android:text="Cuti Alasan Penting "
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Permohonan cuti alasan penting"
                         android:textColor="@color/black"
-                        android:textSize="30sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
