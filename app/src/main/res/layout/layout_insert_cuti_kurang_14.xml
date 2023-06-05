@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="@dimen/_20sdp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp"
+            android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/sad_animation"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/pregnant_anim" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Pengajuan Cuti Kurang dari 14 Hari"
+                android:fontFamily="@font/popsem"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvWaktuMulai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:hint="Tanggal Mulai Cuti"
+                android:background="@drawable/container_edittext2"
+                android:textSize="@dimen/_11ssp"/>
+
+            <TextView
+                android:id="@+id/tvWaktuSelesai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:hint="Tanggal Selesai Cuti"
+                android:background="@drawable/container_edittext2"
+                android:textSize="@dimen/_11ssp"/>
+
+            <EditText
+                android:id="@+id/etPerihal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:hint="Perihal"
+                android:gravity="start"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:lines="4"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/container_edittext2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="File lampiran"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11ssp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:text="Pilih"
+                    android:id="@+id/btnPdfPicker"
+                    app:cornerRadius="@dimen/_5sdp"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_gravity="bottom"
+                    android:enabled="false"
+                    android:id="@+id/etPdfPath"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"/>
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:backgroundTint="@color/main"
+                android:text="Submit"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBatal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                app:backgroundTint="@color/light_gray"
+                android:text="Batal"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

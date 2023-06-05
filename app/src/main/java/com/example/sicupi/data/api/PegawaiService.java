@@ -46,6 +46,15 @@ public interface PegawaiService {
             @Query("id") String id
     ) ;
 
+    @Multipart
+    @POST("pegawai/insertCutiKurang14")
+    Call<ResponseModel> insertCutiKurang14(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part file
+    );
+
+
+
 
 
 
