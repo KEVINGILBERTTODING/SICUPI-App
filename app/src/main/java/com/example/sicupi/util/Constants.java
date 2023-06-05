@@ -10,4 +10,9 @@ public class Constants {
     public static final String SHAREDPR_ROLE= "role";
     public static final String SHAREDPR_JABATAN= "jabatan";
     public static final String IP_ADDRESS ="192.168.100.6";// ip address
+    public static final String URLF_DONWLOAD_LAPORAN_CUTI_SAKIT = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadLaporanCutiSakit/";
+    public static final String URLF_DONWLOAD_LAMPIRAN_CUTI = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadSuratLampiranCutiPegawai/";
+
+
+
 }

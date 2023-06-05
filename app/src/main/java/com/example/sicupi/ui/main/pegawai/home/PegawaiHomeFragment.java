@@ -130,7 +130,7 @@ public class PegawaiHomeFragment extends Fragment {
                     binding.tvStatus.setText("Disetujui");
                 }else {
                     binding.cvCutiStatus.setCardBackgroundColor(getContext().getColor(R.color.yellow));
-                    binding.tvStatus.setText("Proses");
+                    binding.tvStatus.setText("Diproses");
                 }
 
             }else {

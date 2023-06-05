@@ -1,18 +1,25 @@
 package com.example.sicupi.ui.main.pegawai.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sicupi.R;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.util.Constants;
 
 import java.util.List;
 
@@ -55,7 +62,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvJenisCuti, tvMulai, tvSelesai;
         ImageView icStatus;
         public ViewHolder(@NonNull View itemView) {
@@ -64,7 +71,89 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
             tvMulai = itemView.findViewById(R.id.tvMulaiCuti);
             tvSelesai = itemView.findViewById(R.id.tvSelesaiCuti);
             icStatus = itemView.findViewById(R.id.icStatus);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.layout_detail_cuti);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            TextView tvJenisCuti, tvStatusCuti, tvTanggalMulai, tvTanggalSelesai, tvPerihal;
+            CardView cvStatus;
+            Button btnDownloadLampiran, btnDownloadLaporan;
+            tvJenisCuti = dialog.findViewById(R.id.tvJenisCuti);
+            tvStatusCuti = dialog.findViewById(R.id.tvStatus);
+            tvTanggalMulai = dialog.findViewById(R.id.tvTglAwal);
+            tvTanggalSelesai = dialog.findViewById(R.id.tvTglSelesai);
+            tvPerihal = dialog.findViewById(R.id.tvPerihal);
+            cvStatus = dialog.findViewById(R.id.cvCutiStatus);
+            btnDownloadLampiran = dialog.findViewById(R.id.btnDownloadLampiran);
+            btnDownloadLaporan = dialog.findViewById(R.id.btnDownloadLaporan);
+
+            tvJenisCuti.setText(cutiModelList.get(getAdapterPosition()).getKeterangan());
+            tvTanggalMulai.setText(cutiModelList.get(getAdapterPosition()).getMulaiCuti());
+            tvTanggalSelesai.setText(cutiModelList.get(getAdapterPosition()).getAkhirCuti());
+            tvPerihal.setText(cutiModelList.get(getAdapterPosition()).getPerihal());
+
+            if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit < 14")) {
+                downloadSuratLampiran(
+                        String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "kurang"
+                );
+            }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit > 14")) {
+                downloadSuratLampiran(
+                        String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "lebih"
+                );
+            }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Melahirkan")) {
+                downloadSuratLampiran(
+                        String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "melahirkan"
+                );
+            }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Alasan Penting")) {
+                downloadSuratLampiran(
+                        String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "penting"
+                );
+            }
+
+            if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(1)) {
+                tvStatusCuti.setText("Disetujui");
+                btnDownloadLaporan.setVisibility(View.VISIBLE);
+                cvStatus.setCardBackgroundColor(context.getColor(R.color.green));
+            } else if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(2)) {
+                tvStatusCuti.setText("Ditolak");
+                btnDownloadLaporan.setVisibility(View.GONE);
+                cvStatus.setCardBackgroundColor(context.getColor(R.color.red));
+            }else {
+                tvStatusCuti.setText("Diproses");
+                btnDownloadLaporan.setVisibility(View.GONE);
+                cvStatus.setCardBackgroundColor(context.getColor(R.color.yellow));
+            }
+
+
+            dialog.show();
+
+
+
+            btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + cutiModelList.get(getAdapterPosition())
+                            .getCutiId();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    context.startActivity(intent);
+
+                }
+            });
+
+        }
+    }
+
+    private void downloadSuratLampiran(String cutiId, String jenis) {
+        String url = Constants.URLF_DONWLOAD_LAMPIRAN_CUTI + "/" + cutiId + "/" + jenis;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        context.startActivity(intent);
     }
 
 

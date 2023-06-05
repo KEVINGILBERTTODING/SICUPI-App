@@ -32,7 +32,7 @@
                 android:text="Staff Persidangan"
                 android:fontFamily="@font/popmed"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10ssp"
+                android:textSize="@dimen/_11ssp"
                 android:id="@+id/tvJabatan"/>
 
             <LinearLayout
@@ -198,77 +198,74 @@
                     android:textColor="@color/white"/>
             </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:background="@drawable/border_date"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:columnCount="3">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
+                    <ImageView
+                        android:id="@+id/ivCalendar1"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:id="@+id/tvTglAwal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@id/ivCalendar1"
+                        android:fontFamily="@font/popmed"
+                        android:text="2023-02-20"
+                        android:textSize="@dimen/_11ssp" />
+                </RelativeLayout>
 
-                        <ImageView
-                            android:id="@+id/ivCalendar1"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_calendar" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/popmed"
+                    android:text="S/d"
+                    android:textSize="@dimen/_11ssp" />
 
-                        <TextView
-                            android:id="@+id/tvTglAwal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_toRightOf="@id/ivCalendar1"
-                            android:fontFamily="@font/popmed"
-                            android:text="2023-02-20"
-                            android:textSize="@dimen/_11ssp" />
-                    </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="end">
+                    <ImageView
+                        android:id="@+id/ivCalendar2"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_calendar"/>
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:gravity="end"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:id="@+id/ivCalendar2"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_calendar"/>
-
-                        <TextView
-                            android:id="@+id/tvTglSelesai"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_toRightOf="@id/ivCalendar2"
-                            android:fontFamily="@font/popmed"
-                            android:text="2023-02-20"
-                            android:textSize="@dimen/_11ssp" />
-                    </RelativeLayout>
-
-
-
-
-                </LinearLayout>
-
-
-
-
-
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvTglSelesai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@id/ivCalendar2"
+                        android:fontFamily="@font/popmed"
+                        android:text="2023-02-20"
+                        android:textSize="@dimen/_11ssp" />
+                </RelativeLayout>
+            </GridLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
