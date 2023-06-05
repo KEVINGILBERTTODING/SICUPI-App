@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wave_main"
-        tools:context=".ui.main.pegawai.cuti.PegawaiHistoryCutiKurang14Fragment">
+        tools:context=".ui.main.pegawai.cuti.PegawaiHistoryCutiLebih14Fragment">
 
         <ImageButton
             android:layout_width="@dimen/_20sdp"
@@ -29,7 +29,7 @@
                     android:id="@+id/tvJenisCuti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cuti Kurang Dari 14 Hari"
+                    android:text="Cuti Lebih Dari 14 Hari"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popsem"
@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Berikut adalah data cuti dengan durasi kurang dari 14 hari yang telah diajukan."
+                    android:text="Berikut adalah data cuti dengan durasi lebih dari 14 hari yang telah diajukan."
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_10sdp"
