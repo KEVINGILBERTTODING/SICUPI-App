@@ -62,6 +62,7 @@ public class PegawaiHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.tvUsername.setText(sharedPreferences.getString("nama", null));
         getAllCuti();
+        getShowCutiAktif();
         listener();
 
     }
@@ -91,10 +92,12 @@ public class PegawaiHomeFragment extends Fragment {
                     binding.rvCuti.setLayoutManager(linearLayoutManager);
                     binding.rvCuti.setAdapter(historyAllCutiAdapter);
                     binding.rvCuti.setHasFixedSize(true);
+                    binding.tvEmpty.setVisibility(View.GONE);
+
 
                 }else {
                     showProgressBar("sds", "dsds", false);
-                    showToast("normal", "Tidak ada data");
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -102,11 +105,56 @@ public class PegawaiHomeFragment extends Fragment {
             public void onFailure(Call<List<CutiModel>> call, Throwable t) {
                 showProgressBar("sds", "dsds", false);
                 showToast("error", "Tidak ada koneksi internet");
+                binding.tvEmpty.setVisibility(View.GONE);
+
             }
         });
 
 
     }
+
+    private void getShowCutiAktif() {
+        showProgressBar("Loading", "Memuat data cuti...", true);
+        pegawaiService.getShowCuti(userId).enqueue(new Callback<CutiModel>() {
+            @Override
+            public void onResponse(Call<CutiModel> call, Response<CutiModel> response) {
+            if (response.isSuccessful() && response.body() != null) {
+                showProgressBar("sdd",  "sdd", false);
+                binding.tvJenisCuti.setText(response.body().getKeterangan());
+                binding.tvTglAwal.setText(response.body().getMulaiCuti());
+                binding.tvTglSelesai.setText(response.body().getAkhirCuti());
+
+
+                if (response.body().getVerifikasi() == 1) {
+                    binding.cvCutiStatus.setCardBackgroundColor(getContext().getColor(R.color.green));
+                    binding.tvStatus.setText("Disetujui");
+                }else {
+                    binding.cvCutiStatus.setCardBackgroundColor(getContext().getColor(R.color.yellow));
+                    binding.tvStatus.setText("Proses");
+                }
+
+            }else {
+                showProgressBar("sdd",  "sdd", false);
+                binding.tvJenisCuti.setText("Tidak ada data");
+                binding.tvTglAwal.setText("-");
+                binding.tvTglSelesai.setText("-");
+
+
+            }
+            }
+
+            @Override
+            public void onFailure(Call<CutiModel> call, Throwable t) {
+                showProgressBar("sdd",  "sdd", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+
+            }
+        });
+
+
+    }
+
 
 
     private void showProgressBar(String title, String message, boolean isLoading) {

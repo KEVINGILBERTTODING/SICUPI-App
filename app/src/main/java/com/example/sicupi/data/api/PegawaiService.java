@@ -20,5 +20,12 @@ public interface PegawaiService {
             @Query("user_id") String userId
     );
 
+    @GET("pegawai/getShowCuti")
+    Call<CutiModel> getShowCuti(
+            @Query("user_id") String userId
+    );
+
+
+
 
 }

@@ -178,6 +178,7 @@
                 android:textColor="@color/black2"/>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cvCutiStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/green"
@@ -191,6 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Disetujui"
+                    android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/white"/>
@@ -299,7 +301,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/popsem"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_11ssp"
         android:textColor="@color/black3"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -311,6 +313,20 @@
         android:layout_marginLeft="@dimen/_10sdp"
         tools:listitem="@layout/list_cuti"
         android:layout_below="@+id/tv2"/>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Riwayat Cuti"
+        android:layout_below="@+id/cvMenu"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:fontFamily="@font/popsem"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/black3"/>
 
 
 

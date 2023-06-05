@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.sicupi.R;
 import com.example.sicupi.ui.main.pegawai.home.PegawaiHomeFragment;
+import com.example.sicupi.ui.main.pegawai.profile.PegawaiProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -28,6 +29,9 @@ public class PegawaiMainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new PegawaiHomeFragment());
+                    return true;
+                } else if (item.getItemId() == R.id.menuProfile) {
+                    replace(new PegawaiProfileFragment());
                     return true;
                 }
                 return false;
