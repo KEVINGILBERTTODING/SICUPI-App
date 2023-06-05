@@ -70,6 +70,12 @@ public class PegawaiHomeFragment extends Fragment {
 
     private void listener() {
 
+        binding.btnCutiMelahirkan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveFragment(new PegawaiHistoryCutiMelahirkanFragment());
+            }
+        });
     }
 
 
