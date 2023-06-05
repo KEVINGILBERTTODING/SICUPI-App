@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main"
-    tools:context=".SplashScreenActivity">
+    tools:context=".ui.main.splash.SplashScreenActivity">
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:text="SICUPI"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:fontFamily="@font/popsembold"
+            android:fontFamily="@font/popsem"
             android:textSize="13dp"/>
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Sistem Cuti Pegawai Non ASN"
             android:textColor="@color/white"
-            android:fontFamily="@font/popsembold"
+            android:fontFamily="@font/popsem"
             android:textSize="13dp"/>
     </LinearLayout>
 

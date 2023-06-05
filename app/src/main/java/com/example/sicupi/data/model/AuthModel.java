@@ -1,4 +1,4 @@
-package com.example.sicupi.model;
+package com.example.sicupi.data.model;
 
 import com.google.gson.annotations.SerializedName;
 

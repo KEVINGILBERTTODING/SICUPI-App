@@ -1,14 +1,13 @@
-package com.example.sicupi.util;
+package com.example.sicupi.data.api;
 
-import com.example.sicupi.model.AuthModel;
+import com.example.sicupi.data.model.AuthModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.PartMap;
 
-public interface AuthInterface {
+public interface AuthService {
 
     @FormUrlEncoded
     @POST("authapi/login")

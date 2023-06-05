@@ -1,4 +1,4 @@
-package com.example.sicupi;
+package com.example.sicupi.ui.main.auth;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.sicupi.model.AuthModel;
-import com.example.sicupi.util.AuthInterface;
-import com.example.sicupi.util.DataApi;
+import com.example.sicupi.R;
+import com.example.sicupi.data.model.AuthModel;
+import com.example.sicupi.data.api.AuthService;
+import com.example.sicupi.data.api.ApiConfig;
+import com.example.sicupi.ui.main.pegawai.PegawaiMainActivity;
+import com.example.sicupi.util.Constants;
 
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
@@ -33,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         init();
 
-        if (sharedPreferences.getBoolean("logged_in", false)) {
+        if (sharedPreferences.getBoolean(Constants.SHAREDPREF_LOGIN, false)) {
+            if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("3"))
             startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
             finish();
         }
@@ -50,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Constants.SHAREDPREFNAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
@@ -65,17 +69,17 @@ public class LoginActivity extends AppCompatActivity {
             AlertDialog progressDialog = alert.create();
             progressDialog.show();
 
-            AuthInterface authInterface = DataApi.getClient().create(AuthInterface.class);
+            AuthService authInterface = ApiConfig.getClient().create(AuthService.class);
             authInterface.login(etEmail.getText().toString(), etPassword.getText().toString()).enqueue(new Callback<AuthModel>() {
                 @Override
                 public void onResponse(Call<AuthModel> call, Response<AuthModel> response) {
                     AuthModel authModel = response.body();
                     if (response.isSuccessful() && authModel.getCode() == 200) {
-                        editor.putBoolean("logged_in", true);
-                        editor.putString("user_id", authModel.getUserId());
-                        editor.putString("nama", authModel.getNama());
-                        editor.putInt("role", authModel.getRole());
-                        editor.putString("jabatan", authModel.getJabatan());
+                        editor.putBoolean(Constants.SHAREDPREF_LOGIN, true);
+                        editor.putString(Constants.SHAREDPRE_USER_ID, authModel.getUserId());
+                        editor.putString(Constants.SHAREDPRE_NAMA, authModel.getNama());
+                        editor.putString(Constants.SHAREDPR_ROLE, String.valueOf(authModel.getRole()));
+                        editor.putString(Constants.SHAREDPR_JABATAN, authModel.getJabatan());
                         editor.apply();
                         startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
                         finish();

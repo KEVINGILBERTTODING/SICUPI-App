@@ -1,12 +1,14 @@
-package com.example.sicupi.util;
+package com.example.sicupi.data.api;
+
+import com.example.sicupi.util.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DataApi {
+public class ApiConfig {
 
-    public static final String IP_ADDRESS ="192.168.41.4";// ip address
-    public static final String BASE_URL ="http://" + IP_ADDRESS+"/pegawai/api/";
+
+    public static final String BASE_URL ="http://" + Constants.IP_ADDRESS +"/pegawai/api/";
 
     public static Retrofit retrofit = null;
     public static Retrofit getClient(){

@@ -1,4 +1,4 @@
-package com.example.sicupi;
+package com.example.sicupi.ui.main.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+
+import com.example.sicupi.ui.main.auth.LoginActivity;
+import com.example.sicupi.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
