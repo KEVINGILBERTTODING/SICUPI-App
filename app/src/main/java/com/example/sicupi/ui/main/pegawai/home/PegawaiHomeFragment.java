@@ -187,6 +187,7 @@ public class PegawaiHomeFragment extends Fragment {
                 binding.tvJenisCuti.setText("Tidak ada cuti");
                 binding.tvTglAwal.setText("-");
                 binding.tvTglSelesai.setText("-");
+                binding.cvCutiStatus.setVisibility(View.GONE);
 
 
             }

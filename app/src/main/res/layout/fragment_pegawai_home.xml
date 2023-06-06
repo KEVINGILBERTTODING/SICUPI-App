@@ -316,7 +316,7 @@
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Riwayat Cuti"
+        android:text="Tidak ada data."
         android:layout_below="@+id/cvMenu"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
