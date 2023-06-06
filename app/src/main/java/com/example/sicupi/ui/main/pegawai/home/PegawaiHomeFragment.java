@@ -22,6 +22,7 @@ import com.example.sicupi.databinding.FragmentPegawaiHomeBinding;
 import com.example.sicupi.ui.main.pegawai.adapter.HistoryAllCutiAdapter;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiLebih14Fragment;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiMelahirkanFragment;
+import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutikurang14Fragment;
 import com.example.sicupi.util.Constants;
 
@@ -90,6 +91,13 @@ public class PegawaiHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 moveFragment(new PegawaiHistoryCutiLebih14Fragment());
+            }
+        });
+
+        binding.btnCutiPenting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveFragment(new PegawaiHistoryCutiPentingFragment());
             }
         });
     }
