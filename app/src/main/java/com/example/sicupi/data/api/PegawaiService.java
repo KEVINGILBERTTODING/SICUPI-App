@@ -10,6 +10,8 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -66,6 +68,25 @@ public interface PegawaiService {
             @PartMap Map<String, RequestBody> textData,
             @Part MultipartBody.Part file
     );
+
+    @GET("pegawai/checkCutiAktif")
+    Call<CutiModel> checkCutiAktif(
+            @Query("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("pegawai/konfirmasiCutiSelesai")
+    Call<ResponseModel> konfirmasiCutiSelesai(
+            @Field("id") String idCuti,
+            @Field("user_id") String userId
+    );
+
+    @FormUrlEncoded
+    @POST("pegawai/dismissNotif")
+    Call<ResponseModel> dismissNotif(
+            @Field("user_id") String userId
+    );
+
 
 
 

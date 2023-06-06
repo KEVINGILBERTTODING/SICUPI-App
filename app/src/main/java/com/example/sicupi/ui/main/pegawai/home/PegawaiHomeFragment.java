@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PegawaiService;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.ResponseModel;
 import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPegawaiHomeBinding;
 import com.example.sicupi.ui.main.pegawai.adapter.HistoryAllCutiAdapter;
@@ -64,6 +66,7 @@ public class PegawaiHomeFragment extends Fragment {
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
         pegawaiService = ApiConfig.getClient().create(PegawaiService.class);
         getMyProfile();
+        checkCutiAktif();
 
 
 
@@ -181,7 +184,7 @@ public class PegawaiHomeFragment extends Fragment {
 
             }else {
                 showProgressBar("sdd",  "sdd", false);
-                binding.tvJenisCuti.setText("Tidak ada data");
+                binding.tvJenisCuti.setText("Tidak ada cuti");
                 binding.tvTglAwal.setText("-");
                 binding.tvTglSelesai.setText("-");
 
@@ -242,6 +245,13 @@ public class PegawaiHomeFragment extends Fragment {
                                 );
                             }
                         });
+                        btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downlodLaporanCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + response.body().getCutiId());
+
+                            }
+                        });
                     }else  if (response.body().getKeterangan().equals("Cuti Sakit > 14")) {
                         btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -249,6 +259,13 @@ public class PegawaiHomeFragment extends Fragment {
                                 downloadSuratLampiran(
                                         String.valueOf(response.body().getCutiId()), "lebih"
                                 );
+                            }
+                        });
+                        btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downlodLaporanCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT_14 + response.body().getCutiId());
+
                             }
                         });
                     }else  if (response.body().getKeterangan().equals("Cuti Melahirkan")) {
@@ -261,6 +278,13 @@ public class PegawaiHomeFragment extends Fragment {
                                 );
                             }
                         });
+                        btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downlodLaporanCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN + response.body().getCutiId());
+
+                            }
+                        });
                     }else  if (response.body().getKeterangan().equals("Cuti Alasan Penting")) {
                         btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -270,13 +294,20 @@ public class PegawaiHomeFragment extends Fragment {
                                 );
                             }
                         });
+                        btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downlodLaporanCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_PENTING + response.body().getCutiId());
+
+                            }
+                        });
                     }
 
-                    if (cutiModelList.get(response.body().getVerifikasi()).equals("1")) {
+                    if (response.body().getVerifikasi().equals("1")) {
                         tvStatusCuti.setText("Disetujui");
                         btnDownloadLaporan.setVisibility(View.VISIBLE);
                         cvStatus.setCardBackgroundColor(getContext().getColor(R.color.green));
-                    } else if (cutiModelList.get(response.body().getVerifikasi()).equals("2")) {
+                    } else if (response.body().getVerifikasi().equals("2")) {
                         tvStatusCuti.setText("Ditolak");
                         btnDownloadLaporan.setVisibility(View.GONE);
                         cvStatus.setCardBackgroundColor(getContext().getColor(R.color.red));
@@ -293,16 +324,7 @@ public class PegawaiHomeFragment extends Fragment {
 
 
 
-                    btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String url = Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + response.body().getCutiId();
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(url));
-                            getContext().startActivity(intent);
 
-                        }
-                    });
 
 
 
@@ -374,9 +396,62 @@ public class PegawaiHomeFragment extends Fragment {
                     // jika ada pemberitahuan cuti disetujui
                     // atau cuti ditolak
                     if (response.body().getStatusPengajuan().equals("1")){ // jika cuti di setujui
-                        showDialogSuccess();
+                        Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.layout_alert_disetujui);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Button btnOke = dialog.findViewById(R.id.btnOke);
+                        dialog.show();
+                        btnOke.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pegawaiService.dismissNotif(userId).enqueue(new Callback<ResponseModel>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                            dialog.dismiss();
+                                        }else {
+                                            showToast("error", "Terjadi kesalahan");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                        showToast("error", "Tidak ada koneksi internet");
+                                    }
+                                });
+                                dialog.dismiss();
+                            }
+                        });
                     }else if (response.body().getStatusPengajuan().equals("2")){
-                        showDialogRejected();
+                        Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.layout_alert_ditolak);
+                        dialog.setCancelable(false);
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Button btnOke = dialog.findViewById(R.id.btnOke);
+                        dialog.show();
+
+                        btnOke.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pegawaiService.dismissNotif(userId).enqueue(new Callback<ResponseModel>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                            dialog.dismiss();
+                                        }else {
+                                            showToast("error", "Terjadi kesalahan");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                        showToast("error", "Tidak ada koneksi internet");
+                                    }
+                                });
+                                dialog.dismiss();
+                            }
+                        });
                     }
 
 
@@ -401,38 +476,77 @@ public class PegawaiHomeFragment extends Fragment {
 
     }
 
-    private void showDialogSuccess() {
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.layout_alert_disetujui);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button btnOke = dialog.findViewById(R.id.btnOke);
-        dialog.show();
 
-        btnOke.setOnClickListener(new View.OnClickListener() {
+
+    private void checkCutiAktif() {
+        showProgressBar("Loading", "Cek status cuti...", true);
+        pegawaiService.checkCutiAktif(userId).enqueue(new Callback<CutiModel>() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
+            public void onResponse(Call<CutiModel> call, Response<CutiModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    Dialog dialog = new Dialog(getContext());
+                    dialog.setContentView(R.layout.layout_alert_dialog_selsesai);
+                    dialog.setCancelable(false);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    Button btnOke = dialog.findViewById(R.id.btnOke);
+                    dialog.show();
+                    Log.d("id cuti", "onResponse: " + response.body().getCutiId());
+
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showProgressBar("Loading", "Konfirmasi cuti selesai...", true);
+                            pegawaiService.konfirmasiCutiSelesai(
+                                    String.valueOf(response.body().getCutiId()),
+                                    response.body().getKodePegawai()
+                                    ).enqueue(new Callback<ResponseModel>() {
+                                @Override
+                                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                    if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                        showProgressBar("sdsd", "ada", false);
+                                        showToast("success", "Berhasil konfirmasi cuti");
+                                        dialog.dismiss();
+                                    }else {
+                                        showProgressBar("sdsd", "ada", false);
+                                        showToast("error", "Terjadi kesalahan");
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                    showProgressBar("sdsd", "ada", false);
+                                    showToast("error", "Tidak ada koneksi internet");
+
+                                }
+                            });
+                        }
+                    });
+
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CutiModel> call, Throwable t) {
+                showProgressBar("dsd", "sds", false);
+//                showToast("error", "Tidak ada koneksi internet");
+
             }
         });
-
-
     }
 
-    private void showDialogRejected() {
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.layout_alert_ditolak);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button btnOke = dialog.findViewById(R.id.btnOke);
-        dialog.show();
-
-        btnOke.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
+    private void downlodLaporanCuti(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
+
+
+
+
 
 }
