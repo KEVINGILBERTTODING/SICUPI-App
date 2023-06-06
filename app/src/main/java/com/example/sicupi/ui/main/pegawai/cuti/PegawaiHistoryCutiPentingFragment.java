@@ -256,7 +256,7 @@ public class PegawaiHistoryCutiPentingFragment extends Fragment {
                             MultipartBody.Part fileLampiran = MultipartBody.Part.createFormData("lampiran", file.getName(), requestBody);
 
 
-                            pegawaiService.insertCutiLebih14(map, fileLampiran).enqueue(new Callback<ResponseModel> () {
+                            pegawaiService.insertCutiPenting(map, fileLampiran).enqueue(new Callback<ResponseModel> () {
                                 @Override
                                 public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                                     if (response.isSuccessful() && response.body().getStatus() == 200 ) {

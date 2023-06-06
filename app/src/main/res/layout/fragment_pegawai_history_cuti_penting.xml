@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wave_main"
         tools:context=".ui.main.pegawai.cuti.PegawaiHistoryCutiPentingFragment">
 
         <ImageButton
+            android:id="@+id/btnBack"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:backgroundTint="@color/white"
-            android:id="@+id/btnBack"
-            android:layout_margin="@dimen/_10sdp"
-            android:background="@drawable/baseline_arrow_back_24"/>
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/baseline_arrow_back_24"
+            android:backgroundTint="@color/white" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_50sdp"
@@ -39,7 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Berikut adalah data cuti dengan alasan penting yang telah diajukan."
+                    android:text="Berikut adalah data cuti dengan alasan penting yang telah diajukan. Durasi cuti maksimal 3 hari."
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_10sdp"

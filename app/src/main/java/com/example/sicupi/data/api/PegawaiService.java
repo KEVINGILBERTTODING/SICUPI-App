@@ -60,6 +60,15 @@ public interface PegawaiService {
             @Part MultipartBody.Part file
     );
 
+    @Multipart
+    @POST("pegawai/insertCutiPenting")
+    Call<ResponseModel> insertCutiPenting(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part file
+    );
+
+
+
 
 
 
