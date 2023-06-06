@@ -271,6 +271,7 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/container2"
                 android:padding="@dimen/_10sdp"
+                android:id="@+id/rlDetail"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_height="wrap_content">
 

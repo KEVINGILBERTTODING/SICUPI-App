@@ -1,18 +1,24 @@
 package com.example.sicupi.ui.main.pegawai.home;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
@@ -98,6 +104,12 @@ public class PegawaiHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 moveFragment(new PegawaiHistoryCutiPentingFragment());
+            }
+        });
+        binding.rlDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getShowDetailCutiAktif();
             }
         });
     }
@@ -186,6 +198,132 @@ public class PegawaiHomeFragment extends Fragment {
     }
 
 
+    private void getShowDetailCutiAktif() {
+        showProgressBar("Loading", "Memuat data cuti...", true);
+        pegawaiService.getShowCuti(userId).enqueue(new Callback<CutiModel>() {
+            @Override
+            public void onResponse(Call<CutiModel> call, Response<CutiModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showProgressBar("sdd",  "sdd", false);
+                    binding.tvJenisCuti.setText(response.body().getKeterangan());
+                    binding.tvTglAwal.setText(response.body().getMulaiCuti());
+                    binding.tvTglSelesai.setText(response.body().getAkhirCuti());
+
+                    Dialog dialog = new Dialog(getContext());
+                    dialog.setContentView(R.layout.layout_detail_cuti);
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    TextView tvJenisCuti, tvStatusCuti, tvTanggalMulai, tvTanggalSelesai, tvPerihal;
+                    CardView cvStatus;
+                    Button btnDownloadLampiran, btnDownloadLaporan;
+                    tvJenisCuti = dialog.findViewById(R.id.tvJenisCuti);
+                    tvStatusCuti = dialog.findViewById(R.id.tvStatus);
+                    tvTanggalMulai = dialog.findViewById(R.id.tvTglAwal);
+                    tvTanggalSelesai = dialog.findViewById(R.id.tvTglSelesai);
+                    tvPerihal = dialog.findViewById(R.id.tvPerihal);
+                    cvStatus = dialog.findViewById(R.id.cvCutiStatus);
+                    btnDownloadLampiran = dialog.findViewById(R.id.btnDownloadLampiran);
+                    btnDownloadLaporan = dialog.findViewById(R.id.btnDownloadLaporan);
+
+                    tvJenisCuti.setText(response.body().getKeterangan());
+                    tvTanggalMulai.setText(response.body().getMulaiCuti());
+                    tvTanggalSelesai.setText(response.body().getAkhirCuti());
+                    tvPerihal.setText(response.body().getPerihal());
+
+                    if (response.body().getKeterangan().equals("Cuti Sakit < 14")) {
+                        btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downloadSuratLampiran(
+                                        String.valueOf(response.body().getCutiId()), "kurang"
+                                );
+                            }
+                        });
+                    }else  if (response.body().getKeterangan().equals("Cuti Sakit > 14")) {
+                        btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downloadSuratLampiran(
+                                        String.valueOf(response.body().getCutiId()), "lebih"
+                                );
+                            }
+                        });
+                    }else  if (response.body().getKeterangan().equals("Cuti Melahirkan")) {
+
+                        btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downloadSuratLampiran(
+                                        String.valueOf(response.body().getCutiId()), "melahirkan"
+                                );
+                            }
+                        });
+                    }else  if (response.body().getKeterangan().equals("Cuti Alasan Penting")) {
+                        btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                downloadSuratLampiran(
+                                        String.valueOf(response.body().getCutiId()), "penting"
+                                );
+                            }
+                        });
+                    }
+
+                    if (cutiModelList.get(response.body().getVerifikasi()).equals("1")) {
+                        tvStatusCuti.setText("Disetujui");
+                        btnDownloadLaporan.setVisibility(View.VISIBLE);
+                        cvStatus.setCardBackgroundColor(getContext().getColor(R.color.green));
+                    } else if (cutiModelList.get(response.body().getVerifikasi()).equals("2")) {
+                        tvStatusCuti.setText("Ditolak");
+                        btnDownloadLaporan.setVisibility(View.GONE);
+                        cvStatus.setCardBackgroundColor(getContext().getColor(R.color.red));
+                    }else {
+                        tvStatusCuti.setText("Diproses");
+                        btnDownloadLaporan.setVisibility(View.GONE);
+                        cvStatus.setCardBackgroundColor(getContext().getColor(R.color.yellow));
+                    }
+
+
+
+
+                    dialog.show();
+
+
+
+                    btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String url = Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + response.body().getCutiId();
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(url));
+                            getContext().startActivity(intent);
+
+                        }
+                    });
+
+
+
+                }else {
+                    showProgressBar("sdd",  "sdd", false);
+                    binding.tvJenisCuti.setText("Tidak ada data");
+                    binding.tvTglAwal.setText("-");
+                    binding.tvTglSelesai.setText("-");
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CutiModel> call, Throwable t) {
+                showProgressBar("sdd",  "sdd", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+
+            }
+        });
+
+
+    }
+
 
     private void showProgressBar(String title, String message, boolean isLoading) {
         if (isLoading) {
@@ -212,4 +350,12 @@ public class PegawaiHomeFragment extends Fragment {
             Toasty.error(getContext(), text, Toasty.LENGTH_SHORT).show();
         }
     }
+
+    private void downloadSuratLampiran(String cutiId, String jenis) {
+        String url = Constants.URLF_DONWLOAD_LAMPIRAN_CUTI + "/" + cutiId + "/" + jenis;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
+    }
+
 }
