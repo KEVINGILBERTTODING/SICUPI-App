@@ -1,5 +1,6 @@
 package com.example.sicupi.data.model;
 
+import com.example.sicupi.util.Constants;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -139,7 +140,7 @@ public class UserModel implements Serializable
     }
 
     public String getFoto() {
-        return foto;
+        return Constants.URL_PEGAWAI_PHOTO_PROFILE + foto;
     }
 
     public void setFoto(String foto) {

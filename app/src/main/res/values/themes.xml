@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.Sicupi" parent="Base.Theme.Sicupi" />
+
+    <style name="DiamondCut">
+        <item name="cornerSize">75dp</item>
+        <item name="cornerFamily">cut</item>
+    </style>
 </resources>

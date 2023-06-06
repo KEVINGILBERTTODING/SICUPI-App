@@ -87,6 +87,19 @@ public interface PegawaiService {
             @Field("user_id") String userId
     );
 
+    @Multipart
+    @POST("pegawai/editProfile")
+    Call<ResponseModel> editProfile(
+
+            @PartMap Map<String, RequestBody> textData
+    );
+
+    @GET("pegawai/getTotalCuti")
+    Call<List<CutiModel>> totalCutiModelProfile(
+            @Query("user_id") String userId,
+            @Query("verifikasi") Integer verifikasi
+    );
+
 
 
 

@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PegawaiService;
@@ -35,6 +37,7 @@ import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiLebih14Fragment
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiMelahirkanFragment;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutikurang14Fragment;
+import com.example.sicupi.ui.main.pegawai.profile.PegawaiProfileFragment;
 import com.example.sicupi.util.Constants;
 
 import java.util.List;
@@ -117,6 +120,13 @@ public class PegawaiHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getShowDetailCutiAktif();
+            }
+        });
+
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveFragment(new PegawaiProfileFragment());
             }
         });
     }
@@ -392,6 +402,16 @@ public class PegawaiHomeFragment extends Fragment {
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     showProgressBar("sds", "adad", false);
+                    Glide.with(getContext())
+                            .load(response.body().getFoto())
+                            .centerCrop()
+                            .fitCenter()
+                            .centerInside()
+                            .skipMemoryCache(true)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .into(binding.profileImage);
+
+                    Log.d("foto profile", "onResponse: " + response.body().getFoto());
 
 
                     // jika ada pemberitahuan cuti disetujui

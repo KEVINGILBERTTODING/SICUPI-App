@@ -17,5 +17,8 @@ public class Constants {
     public static final String URLF_DONWLOAD_LAMPIRAN_CUTI = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadSuratLampiranCutiPegawai/";
 
 
+    public static final String URL_PEGAWAI_PHOTO_PROFILE = "http://" + IP_ADDRESS + "/pegawai/assets/data/photo_profile/pegawai/";
+
+
 
 }
