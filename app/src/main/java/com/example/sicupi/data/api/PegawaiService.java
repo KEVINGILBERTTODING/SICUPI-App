@@ -100,6 +100,13 @@ public interface PegawaiService {
             @Query("verifikasi") Integer verifikasi
     );
 
+    @Multipart
+    @POST("pegawai/editPhotoProfile")
+    Call<ResponseModel> updatePhotoProfile(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part file
+    );
+
 
 
 
