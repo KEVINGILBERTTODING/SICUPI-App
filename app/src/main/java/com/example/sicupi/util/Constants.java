@@ -11,6 +11,9 @@ public class Constants {
     public static final String SHAREDPR_JABATAN= "jabatan";
     public static final String IP_ADDRESS ="192.168.100.6";// ip address
     public static final String URLF_DONWLOAD_LAPORAN_CUTI_SAKIT = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadLaporanCutiSakit/";
+    public static final String URLF_DONWLOAD_LAPORAN_CUTI_SAKIT_14 = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadLaporanCutiSakit14/";
+    public static final String URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadLaporanCutiMelahirkan/";
+    public static final String URLF_DONWLOAD_LAPORAN_CUTI_PENTING = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadLaporanCutiPenting/";
     public static final String URLF_DONWLOAD_LAMPIRAN_CUTI = "http://" + IP_ADDRESS + "/pegawai/api/pegawai/downloadSuratLampiranCutiPegawai/";
 
 

@@ -111,6 +111,12 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         );
                     }
                 });
+                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + cutiModelList.get(getAdapterPosition()).getCutiId());
+                    }
+                });
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit > 14")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,6 +124,12 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         downloadSuratLampiran(
                                 String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "lebih"
                         );
+                    }
+                });
+                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT_14 + cutiModelList.get(getAdapterPosition()).getCutiId());
                     }
                 });
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Melahirkan")) {
@@ -130,6 +142,12 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                       );
                   }
               });
+                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN + cutiModelList.get(getAdapterPosition()).getCutiId());
+                    }
+                });
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Alasan Penting")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -137,6 +155,12 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         downloadSuratLampiran(
                                 String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId()), "penting"
                         );
+                    }
+                });
+                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_PENTING + cutiModelList.get(getAdapterPosition()).getCutiId());
                     }
                 });
             }
@@ -162,23 +186,16 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
 
 
 
-            btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String url = Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + cutiModelList.get(getAdapterPosition())
-                            .getCutiId();
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(url));
-                    context.startActivity(intent);
-
-                }
-            });
-
         }
     }
 
     private void downloadSuratLampiran(String cutiId, String jenis) {
         String url = Constants.URLF_DONWLOAD_LAMPIRAN_CUTI + "/" + cutiId + "/" + jenis;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        context.startActivity(intent);
+    }
+    private void downloadSuratCuti(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
