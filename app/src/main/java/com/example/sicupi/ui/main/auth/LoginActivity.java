@@ -16,6 +16,7 @@ import com.example.sicupi.data.model.AuthModel;
 import com.example.sicupi.data.api.AuthService;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.ui.main.pegawai.PegawaiMainActivity;
+import com.example.sicupi.ui.main.pimpinan.PimpinanMainActivity;
 import com.example.sicupi.util.Constants;
 
 import es.dmoral.toasty.Toasty;
@@ -37,9 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         init();
 
         if (sharedPreferences.getBoolean(Constants.SHAREDPREF_LOGIN, false)) {
-            if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("3"))
-            startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
-            finish();
+            if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("3")){
+                startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
+                finish();
+            }else if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("2")) {
+                startActivity(new Intent(LoginActivity.this, PimpinanMainActivity.class));
+                finish();
+            }
+
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -75,16 +81,31 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<AuthModel> call, Response<AuthModel> response) {
                     AuthModel authModel = response.body();
                     if (response.isSuccessful() && authModel.getCode() == 200) {
-                        editor.putBoolean(Constants.SHAREDPREF_LOGIN, true);
-                        editor.putString(Constants.SHAREDPRE_USER_ID, authModel.getUserId());
-                        editor.putString(Constants.SHAREDPRE_NAMA, authModel.getNama());
-                        editor.putString(Constants.SHAREDPR_ROLE, String.valueOf(authModel.getRole()));
-                        editor.putString(Constants.SHAREDPR_JABATAN, authModel.getJabatan());
-                        editor.apply();
-                        startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
-                        finish();
-                        Toasty.success(LoginActivity.this, "Selamat datang " + authModel.getNama(), Toasty.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                        
+                        if (response.body().getRole() == 2) { // Pimpinan
+                            editor.putBoolean(Constants.SHAREDPREF_LOGIN, true);
+                            editor.putString(Constants.SHAREDPRE_USER_ID, authModel.getUserId());
+                            editor.putString(Constants.SHAREDPRE_NAMA, authModel.getNama());
+                            editor.putString(Constants.SHAREDPR_ROLE, String.valueOf(authModel.getRole()));
+                            editor.putString(Constants.SHAREDPR_JABATAN, authModel.getJabatan());
+                            editor.apply();
+                            startActivity(new Intent(LoginActivity.this, PimpinanMainActivity.class));
+                            finish();
+                            Toasty.success(LoginActivity.this, "Selamat datang " + authModel.getNama(), Toasty.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }else if (response.body().getRole() ==3){ // Pegawai
+                            editor.putBoolean(Constants.SHAREDPREF_LOGIN, true);
+                            editor.putString(Constants.SHAREDPRE_USER_ID, authModel.getUserId());
+                            editor.putString(Constants.SHAREDPRE_NAMA, authModel.getNama());
+                            editor.putString(Constants.SHAREDPR_ROLE, String.valueOf(authModel.getRole()));
+                            editor.putString(Constants.SHAREDPR_JABATAN, authModel.getJabatan());
+                            editor.apply();
+                            startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
+                            finish();
+                            Toasty.success(LoginActivity.this, "Selamat datang " + authModel.getNama(), Toasty.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+
 
                     }else {
                         Toasty.error(getApplicationContext(), authModel.getMessage(), Toasty.LENGTH_SHORT).show();
