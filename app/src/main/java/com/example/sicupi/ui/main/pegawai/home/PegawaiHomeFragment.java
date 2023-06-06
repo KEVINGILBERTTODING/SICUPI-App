@@ -508,7 +508,9 @@ public class PegawaiHomeFragment extends Fragment {
                                     if (response.isSuccessful() && response.body().getStatus() == 200) {
                                         showProgressBar("sdsd", "ada", false);
                                         showToast("success", "Berhasil konfirmasi cuti");
+                                        getShowDetailCutiAktif();
                                         dialog.dismiss();
+
                                     }else {
                                         showProgressBar("sdsd", "ada", false);
                                         showToast("error", "Terjadi kesalahan");
