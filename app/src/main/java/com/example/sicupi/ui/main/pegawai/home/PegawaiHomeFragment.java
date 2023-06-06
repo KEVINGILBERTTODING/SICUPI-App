@@ -303,11 +303,11 @@ public class PegawaiHomeFragment extends Fragment {
                         });
                     }
 
-                    if (response.body().getVerifikasi().equals("1")) {
+                    if (response.body().getVerifikasi() == 1) {
                         tvStatusCuti.setText("Disetujui");
                         btnDownloadLaporan.setVisibility(View.VISIBLE);
                         cvStatus.setCardBackgroundColor(getContext().getColor(R.color.green));
-                    } else if (response.body().getVerifikasi().equals("2")) {
+                    } else if (response.body().getVerifikasi() ==2) {
                         tvStatusCuti.setText("Ditolak");
                         btnDownloadLaporan.setVisibility(View.GONE);
                         cvStatus.setCardBackgroundColor(getContext().getColor(R.color.red));
