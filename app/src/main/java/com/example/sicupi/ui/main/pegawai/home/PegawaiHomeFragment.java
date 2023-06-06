@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -24,6 +26,7 @@ import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PegawaiService;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPegawaiHomeBinding;
 import com.example.sicupi.ui.main.pegawai.adapter.HistoryAllCutiAdapter;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiLebih14Fragment;
@@ -60,6 +63,7 @@ public class PegawaiHomeFragment extends Fragment {
         sharedPreferences = getContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
         pegawaiService = ApiConfig.getClient().create(PegawaiService.class);
+        getMyProfile();
 
 
 
@@ -356,6 +360,79 @@ public class PegawaiHomeFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
+    }
+
+    private void getMyProfile() {
+        showProgressBar("Loading", "Memuat data...", true);
+        pegawaiService.getMyProfile(userId).enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showProgressBar("sds", "adad", false);
+
+
+                    // jika ada pemberitahuan cuti disetujui
+                    // atau cuti ditolak
+                    if (response.body().getStatusPengajuan().equals("1")){ // jika cuti di setujui
+                        showDialogSuccess();
+                    }else if (response.body().getStatusPengajuan().equals("2")){
+                        showDialogRejected();
+                    }
+
+
+
+
+
+                }else {
+                    showProgressBar("sds", "adad", false);
+                    showToast("error", "Gagal memuat data pegawai");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
+                showProgressBar("sds", "adad", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+
+            }
+        });
+
+    }
+
+    private void showDialogSuccess() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.layout_alert_disetujui);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button btnOke = dialog.findViewById(R.id.btnOke);
+        dialog.show();
+
+        btnOke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
+
+    private void showDialogRejected() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.layout_alert_ditolak);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button btnOke = dialog.findViewById(R.id.btnOke);
+        dialog.show();
+
+        btnOke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
     }
 
 }

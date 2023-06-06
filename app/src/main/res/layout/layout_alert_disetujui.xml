@@ -19,26 +19,27 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/sad_animation"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/warning_anim" />
+                app:lottie_rawRes="@raw/success_anim" />
             <TextView
                 android:layout_width="match_parent"
                 android:text="Pemberitahuan!"
                 android:fontFamily="@font/popsem"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:textColor="@color/main"
+                android:textColor="@color/green"
                 android:textSize="@dimen/_13sdp"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/tvMessageAlert"
-                android:text="Anda telah mengajukan cuti, mohon menunggu verifikasi dari admin."
+                android:text="Pengajuan cuti anda telah disetujui"
                 android:fontFamily="@font/popmed"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"

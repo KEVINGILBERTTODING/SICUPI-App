@@ -46,7 +46,9 @@ public class UserModel implements Serializable
     String cuti;
     @SerializedName("tgl_masuk")
     String tglMasuk;
-    public UserModel(String kodePegawai, String tglMasuk, String nik, String nama, String jabatan, String jenisKelamin, String nomorTelepon, String alamat, String email, String password, String foto, String status, String role, String cuti) {
+    @SerializedName("status_pengajuan")
+    String statusPengajuan;
+    public UserModel(String kodePegawai, String statusPengajuan, String tglMasuk, String nik, String nama, String jabatan, String jenisKelamin, String nomorTelepon, String alamat, String email, String password, String foto, String status, String role, String cuti) {
         this.kodePegawai = kodePegawai;
         this.nik = nik;
         this.nama = nama;
@@ -61,6 +63,7 @@ public class UserModel implements Serializable
         this.role = role;
         this.tglMasuk = tglMasuk;
         this.cuti = cuti;
+        this.statusPengajuan = statusPengajuan;
     }
 
     public String getKodePegawai() {
@@ -173,5 +176,13 @@ public class UserModel implements Serializable
 
     public void setTglMasuk(String tglMasuk) {
         this.tglMasuk = tglMasuk;
+    }
+
+    public String getStatusPengajuan() {
+        return statusPengajuan;
+    }
+
+    public void setStatusPengajuan(String statusPengajuan) {
+        this.statusPengajuan = statusPengajuan;
     }
 }
