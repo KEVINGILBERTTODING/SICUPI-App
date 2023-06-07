@@ -1,5 +1,6 @@
 package com.example.sicupi.ui.main.pimpinan.adapter;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,14 +18,25 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sicupi.R;
+import com.example.sicupi.data.api.ApiConfig;
+import com.example.sicupi.data.api.PegawaiService;
+import com.example.sicupi.data.api.PimpinanService;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.ResponseModel;
 import com.example.sicupi.util.Constants;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCutiAdapter.ViewHolder> {
     Context context;
     List<CutiModel> cutiModelList;
+    private AlertDialog progressDialog;
+    PimpinanService pimpinanService;
 
     public AllPengajuanCutiAdapter(Context context, List<CutiModel> cutiModelList) {
         this.context = context;
@@ -44,6 +56,7 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
         holder.tvMulai.setText(cutiModelList.get(holder.getAdapterPosition()).getMulaiCuti());
         holder.tvSelesai.setText(cutiModelList.get(holder.getAdapterPosition()).getAkhirCuti());
         holder.tvNama.setText(cutiModelList.get(holder.getAdapterPosition()).getNama());
+
 
 
 
@@ -84,24 +97,25 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
         @Override
         public void onClick(View v) {
             Dialog dialog = new Dialog(context);
-            dialog.setContentView(R.layout.layout_detail_cuti);
+            dialog.setContentView(R.layout.layout_detail_cuti_pimpinan);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            TextView tvJenisCuti, tvStatusCuti, tvTanggalMulai, tvTanggalSelesai, tvPerihal;
-            CardView cvStatus;
-            Button btnDownloadLampiran, btnDownloadLaporan;
+            TextView tvJenisCuti, tvTanggalMulai, tvTanggalSelesai, tvPerihal, tvNamaPengaju;
+            Button btnDownloadLampiran, btnTolak, btnSetuju;
             tvJenisCuti = dialog.findViewById(R.id.tvJenisCuti);
-            tvStatusCuti = dialog.findViewById(R.id.tvStatus);
             tvTanggalMulai = dialog.findViewById(R.id.tvTglAwal);
             tvTanggalSelesai = dialog.findViewById(R.id.tvTglSelesai);
             tvPerihal = dialog.findViewById(R.id.tvPerihal);
-            cvStatus = dialog.findViewById(R.id.cvCutiStatus);
+            btnSetuju = dialog.findViewById(R.id.btnSetuju);
+            btnTolak = dialog.findViewById(R.id.btnTolak);
+            tvNamaPengaju = dialog.findViewById(R.id.tvNamaPegawai);
             btnDownloadLampiran = dialog.findViewById(R.id.btnDownloadLampiran);
-            btnDownloadLaporan = dialog.findViewById(R.id.btnDownloadLaporan);
+            pimpinanService = ApiConfig.getClient().create(PimpinanService.class);
 
             tvJenisCuti.setText(cutiModelList.get(getAdapterPosition()).getKeterangan());
             tvTanggalMulai.setText(cutiModelList.get(getAdapterPosition()).getMulaiCuti());
             tvTanggalSelesai.setText(cutiModelList.get(getAdapterPosition()).getAkhirCuti());
-            tvPerihal.setText(cutiModelList.get(getAdapterPosition()).getPerihal());
+
+            tvNamaPengaju.setText(cutiModelList.get(getAdapterPosition()).getNama());
 
             if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit < 14")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
@@ -112,13 +126,10 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
-            }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit > 14")) {
+                tvPerihal.setText(cutiModelList.get(getAdapterPosition()).getPerihal());
+
+            }
+            else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit > 14")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -127,12 +138,8 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT_14 + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+                tvPerihal.setText(cutiModelList.get(getAdapterPosition()).getPerihal());
+
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Melahirkan")) {
 
               btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
@@ -143,12 +150,8 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
                       );
                   }
               });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+              tvPerihal.setText("-");
+
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Alasan Penting")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,32 +161,72 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_PENTING + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+                tvPerihal.setText(cutiModelList.get(getAdapterPosition()).getPerihal());
+
             }
-
-            if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(1)) {
-                tvStatusCuti.setText("Disetujui");
-                btnDownloadLaporan.setVisibility(View.VISIBLE);
-                cvStatus.setCardBackgroundColor(context.getColor(R.color.green));
-            } else if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(2)) {
-                tvStatusCuti.setText("Ditolak");
-                btnDownloadLaporan.setVisibility(View.GONE);
-                cvStatus.setCardBackgroundColor(context.getColor(R.color.red));
-            }else {
-                tvStatusCuti.setText("Diproses");
-                btnDownloadLaporan.setVisibility(View.GONE);
-                cvStatus.setCardBackgroundColor(context.getColor(R.color.yellow));
-            }
-
-
-
-
             dialog.show();
+
+            btnTolak.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showProgressBar("Loading", "Menyimpan data...", true);
+                    pimpinanService.tolakCuti(cutiModelList.get(getAdapterPosition()).getKodePegawai(),
+                            String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId())).enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                showToast("success", "Berhasil menolak cuti");
+                                cutiModelList.remove(getAdapterPosition());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                                showProgressBar("sds", "dsdss", false);
+                            }else {
+                                showProgressBar("sds", "dsdss", false);
+                                showToast("error", "Terjadi kesalahan");
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+
+                            showProgressBar("sds", "dsdss", false);
+                            showToast("error", "Tidak ada koneksi internet");
+                        }
+                    });
+                }
+            });
+
+            btnSetuju.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showProgressBar("Loading", "Menyimpan data...", true);
+                    pimpinanService.setujuCuti(cutiModelList.get(getAdapterPosition()).getKodePegawai(),
+                            String.valueOf(cutiModelList.get(getAdapterPosition()).getCutiId())).enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                showToast("success", "Berhasil menyetujui cuti");
+                                cutiModelList.remove(getAdapterPosition());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                                showProgressBar("sds", "dsdss", false);
+                            }else {
+                                showProgressBar("sds", "dsdss", false);
+                                showToast("error", "Terjadi kesalahan");
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+
+                            showProgressBar("sds", "dsdss", false);
+                            showToast("error", "Tidak ada koneksi internet");
+                        }
+                    });
+                }
+            });
 
 
 
@@ -196,10 +239,34 @@ public class AllPengajuanCutiAdapter extends RecyclerView.Adapter<AllPengajuanCu
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
     }
-    private void downloadSuratCuti(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        context.startActivity(intent);
+
+
+    private void showToast(String jenis, String message) {
+        if (jenis.equals("success")) {
+            Toasty.success(context, message, Toasty.LENGTH_SHORT).show();
+        }else {
+            Toasty.error(context, message, Toasty.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void showProgressBar(String title, String message, boolean isLoading) {
+        if (isLoading) {
+            // Membuat progress dialog baru jika belum ada
+            if (progressDialog == null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(title);
+                builder.setMessage(message);
+                builder.setCancelable(false);
+                progressDialog = builder.create();
+            }
+            progressDialog.show(); // Menampilkan progress dialog
+        } else {
+            // Menyembunyikan progress dialog jika ada
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        }
     }
 
 

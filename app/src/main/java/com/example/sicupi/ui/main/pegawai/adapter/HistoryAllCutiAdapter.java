@@ -148,6 +148,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN + cutiModelList.get(getAdapterPosition()).getCutiId());
                     }
                 });
+                tvPerihal.setText("-");
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Alasan Penting")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override

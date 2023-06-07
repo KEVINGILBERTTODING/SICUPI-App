@@ -1,45 +1,29 @@
 package com.example.sicupi.ui.main.pimpinan.home;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
-import com.example.sicupi.data.api.PegawaiService;
 import com.example.sicupi.data.api.PimpinanService;
 import com.example.sicupi.data.model.CutiModel;
-import com.example.sicupi.data.model.ResponseModel;
-import com.example.sicupi.data.model.UserModel;
-import com.example.sicupi.databinding.FragmentPegawaiHomeBinding;
 import com.example.sicupi.databinding.FragmentPimpinanHomeBinding;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
-import com.example.sicupi.ui.main.pimpinan.adapter.HistoryAllCutiAdapter;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiLebih14Fragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiMelahirkanFragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutikurang14Fragment;
-import com.example.sicupi.ui.main.pimpinan.profile.PegawaiProfileFragment;
+import com.example.sicupi.ui.main.pimpinan.profile.PimpinanProfileFragment;
 import com.example.sicupi.util.Constants;
 
 import java.util.List;
@@ -121,7 +105,14 @@ public class PimpinanHomeFragment extends Fragment {
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PegawaiProfileFragment());
+                moveFragment(new PimpinanProfileFragment());
+            }
+        });
+
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveFragment(new PimpinanProfileFragment());
             }
         });
     }

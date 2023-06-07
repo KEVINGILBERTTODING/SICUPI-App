@@ -29,6 +29,7 @@ import com.example.sicupi.data.model.CutiModel;
 import com.example.sicupi.data.model.ResponseModel;
 import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPegawaiProfileBinding;
+import com.example.sicupi.databinding.FragmentPimpinanProfileBinding;
 import com.example.sicupi.ui.main.auth.LoginActivity;
 import com.example.sicupi.util.Constants;
 
@@ -48,8 +49,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PegawaiProfileFragment extends Fragment {
-    private FragmentPegawaiProfileBinding binding;
+public class PimpinanProfileFragment extends Fragment {
+    private FragmentPimpinanProfileBinding binding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     PegawaiService pegawaiService;
@@ -62,7 +63,7 @@ public class PegawaiProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentPegawaiProfileBinding.inflate(inflater, container, false);
+        binding = FragmentPimpinanProfileBinding.inflate(inflater, container, false);
         sharedPreferences = getContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
         editor = sharedPreferences.edit();
@@ -75,8 +76,6 @@ public class PegawaiProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getTotalCuti(1, binding.tvSetuju);
-        getTotalCuti(2, binding.tvTolak);
         getMyProfile();
         listener();
 
@@ -182,29 +181,6 @@ public class PegawaiProfileFragment extends Fragment {
         }
     }
 
-    private void getTotalCuti(Integer verifikasi, TextView tvTotal) {
-        showProgressBar("Loading", "Memuat data...", true);
-        pegawaiService.totalCutiModelProfile(userId, verifikasi).enqueue(new Callback<List<CutiModel>>() {
-            @Override
-            public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
-                if (response.isSuccessful() && response.body().size() > 0) {
-                    tvTotal.setText(String.valueOf(response.body().size()));
-                    showProgressBar("dsdsd", "sdsds", false);
-                }else {
-                    tvTotal.setText("0");
-                    showProgressBar("dsdsd", "sdsds", false);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<CutiModel>> call, Throwable t) {
-                tvTotal.setText("-");
-                showProgressBar("dsdsd", "sdsds", false);
-                showToast("error", "Tidak ada koneksi internet");
-
-            }
-        });
-    }
 
     private void logOut() {
         editor.clear().apply();
