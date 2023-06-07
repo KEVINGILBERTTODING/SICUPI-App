@@ -56,4 +56,14 @@ public interface PimpinanService {
             );
 
 
+    @Multipart
+    @POST("pimpinan/editProfile")
+    Call<ResponseModel> editProfile(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+
+
+
+
 }

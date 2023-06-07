@@ -21,8 +21,9 @@ public class PimpinanModel implements Serializable {
 
     @SerializedName("foto")
     String foto;
-
-    public PimpinanModel(String userId, String foto, String nama, String jabatan, String email, String noTelp, String role) {
+    @SerializedName("password")
+    String password;
+    public PimpinanModel(String userId, String password, String foto, String nama, String jabatan, String email, String noTelp, String role) {
         this.userId = userId;
         this.nama = nama;
         this.jabatan = jabatan;
@@ -30,6 +31,7 @@ public class PimpinanModel implements Serializable {
         this.noTelp = noTelp;
         this.role = role;
         this.foto = foto;
+        this.password = password;
     }
 
     public String getUserId() {
@@ -82,5 +84,9 @@ public class PimpinanModel implements Serializable {
 
     public String getFoto() {
         return Constants.URL_PIMPINAN_PHOTO_PROFILE + foto;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

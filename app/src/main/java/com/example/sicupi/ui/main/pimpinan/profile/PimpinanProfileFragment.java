@@ -14,7 +14,6 @@ import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +23,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
-import com.example.sicupi.data.api.PegawaiService;
 import com.example.sicupi.data.api.PimpinanService;
-import com.example.sicupi.data.model.CutiModel;
 import com.example.sicupi.data.model.PimpinanModel;
 import com.example.sicupi.data.model.ResponseModel;
-import com.example.sicupi.data.model.UserModel;
-import com.example.sicupi.databinding.FragmentPegawaiProfileBinding;
 import com.example.sicupi.databinding.FragmentPimpinanProfileBinding;
 import com.example.sicupi.ui.main.auth.LoginActivity;
 import com.example.sicupi.util.Constants;
@@ -41,7 +36,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import okhttp3.MediaType;
@@ -88,7 +82,7 @@ public class PimpinanProfileFragment extends Fragment {
         binding.rvUbahProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framePegawai, new PegawaiEditProfileFragment())
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framePimpinan, new PimpinanEditProfileFragment())
                         .addToBackStack(null).commit();
             }
         });

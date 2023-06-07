@@ -14,9 +14,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PegawaiService;
+import com.example.sicupi.data.api.PimpinanService;
+import com.example.sicupi.data.model.PimpinanModel;
 import com.example.sicupi.data.model.ResponseModel;
 import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPegawaiEditProfileBinding;
+import com.example.sicupi.databinding.FragmentPimpinanEditProfileBinding;
 import com.example.sicupi.util.Constants;
 
 import java.util.HashMap;
@@ -28,12 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PegawaiEditProfileFragment extends Fragment {
+public class PimpinanEditProfileFragment extends Fragment {
     SharedPreferences sharedPreferences;
     String userId;
-    PegawaiService pegawaiService;
+    PimpinanService pimpinanService;
     AlertDialog progressDialog;
-    private FragmentPegawaiEditProfileBinding binding;
+    private FragmentPimpinanEditProfileBinding binding;
 
 
 
@@ -41,10 +44,10 @@ public class PegawaiEditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentPegawaiEditProfileBinding.inflate(inflater, container, false);
+        binding = FragmentPimpinanEditProfileBinding.inflate(inflater, container, false);
         sharedPreferences = getContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
-        pegawaiService = ApiConfig.getClient().create(PegawaiService.class);
+        pimpinanService = ApiConfig.getClient().create(PimpinanService.class);
         getMyProfile();
 
         return binding.getRoot();
@@ -68,15 +71,9 @@ public class PegawaiEditProfileFragment extends Fragment {
         binding.btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (binding.etNik.getText().toString().isEmpty()){
-                    binding.etNik.setError("Kolom tidak boleh kosong");
-                    binding.etNik.requestFocus();
-                }else if (binding.etNama.getText().toString().isEmpty()){
+                if (binding.etNama.getText().toString().isEmpty()){
                     binding.etNama.setError("Kolom tidak boleh kosong");
                     binding.etNama.requestFocus();
-                }else if (binding.etAlamat.getText().toString().isEmpty()){
-                    binding.etAlamat.setError("Kolom tidak boleh kosong");
-                    binding.etAlamat.requestFocus();
                 }else if (binding.etTelepn.getText().toString().isEmpty()){
                     binding.etTelepn.setError("Kolom tidak boleh kosong");
                     binding.etTelepn.requestFocus();
@@ -102,15 +99,13 @@ public class PegawaiEditProfileFragment extends Fragment {
 
     private void getMyProfile() {
         showProgressBar("Loading", "Memuat data...", true);
-        pegawaiService.getMyProfile(userId).enqueue(new Callback<UserModel>() {
+        pimpinanService.getMyProfile(userId).enqueue(new Callback<PimpinanModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(Call<PimpinanModel> call, Response<PimpinanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     showProgressBar("sds", "adad", false);
-                    binding.etNik.setText(response.body().getNik());
                     binding.etNama.setText(response.body().getNama());
-                    binding.etAlamat.setText(response.body().getAlamat());
-                    binding.etTelepn.setText(response.body().getNomorTelepon());
+                    binding.etTelepn.setText(response.body().getNoTelp());
                     binding.etEmail.setText(response.body().getEmail());
                     binding.etPassword.setText(response.body().getPassword());
 
@@ -124,7 +119,7 @@ public class PegawaiEditProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(Call<PimpinanModel> call, Throwable t) {
 
                 showProgressBar("sds", "adad", false);
                 showToast("error", "Tidak ada koneksi internet");
@@ -166,14 +161,12 @@ public class PegawaiEditProfileFragment extends Fragment {
     private void simpanData() {
         showProgressBar("Loading", "Menyimpan perubahan...", true);
         HashMap map = new HashMap();
-        map.put("nik", RequestBody.create(MediaType.parse("text/plain"), binding.etNik.getText().toString()));
         map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
         map.put("nama", RequestBody.create(MediaType.parse("text/plain"), binding.etNama.getText().toString()));
-        map.put("alamat", RequestBody.create(MediaType.parse("text/plain"), binding.etAlamat.getText().toString()));
         map.put("no_telp", RequestBody.create(MediaType.parse("text/plain"), binding.etTelepn.getText().toString()));
         map.put("email", RequestBody.create(MediaType.parse("text/plain"), binding.etEmail.getText().toString()));
         map.put("password", RequestBody.create(MediaType.parse("text/plain"), binding.etPassword.getText().toString()));
-        pegawaiService.editProfile(map).enqueue(new Callback<ResponseModel>() {
+        pimpinanService.editProfile(map).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call <ResponseModel>call, Response<ResponseModel> response) {
                 if (response.isSuccessful() && response.body().getStatus() == 200) {
