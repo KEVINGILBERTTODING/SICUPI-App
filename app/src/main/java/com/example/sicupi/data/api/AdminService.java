@@ -53,6 +53,17 @@ public interface AdminService {
             @Field("user_id") String userId
     );
 
+    @GET("admin/getAllPengajuanCutiAdminKeterangan")
+    Call<List<CutiModel>> getAllPengajuanCutiAdminKeterangan(
+            @Query("keterangan") String keterangan
+    );
+
+
+    @GET("admin/getAllPengajuanCutiAdminSelesai")
+    Call<List<CutiModel>> getAllPengajuanCutiAdminSelesai(
+            @Query("keterangan") String keterangan
+    );
+
 
 
 

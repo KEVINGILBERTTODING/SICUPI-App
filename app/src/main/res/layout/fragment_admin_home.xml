@@ -9,6 +9,7 @@
     tools:context=".ui.main.admin.home.AdminHomeFragment">
 
     <RelativeLayout
+        android:id="@+id/rlHeader"
         android:layout_width="match_parent"
         android:background="@drawable/wave_main"
         android:padding="@dimen/_10sdp"
@@ -147,6 +148,7 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:scrollbars="none"
+        android:layout_marginTop="@dimen/_160sdp"
         android:id="@+id/scrollview"
         android:layout_height="wrap_content">
 
@@ -161,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
-                android:layout_marginTop="@dimen/_160sdp"
+
                 app:cardCornerRadius="@dimen/_10sdp">
 
                 <LinearLayout
@@ -200,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
-                android:layout_marginTop="@dimen/_160sdp"
+
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -239,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
-                android:layout_marginTop="@dimen/_160sdp"
+
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -279,7 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
-                android:layout_marginTop="@dimen/_160sdp"
+
                 app:cardCornerRadius="@dimen/_10sdp">
                 <LinearLayout
                     android:layout_width="match_parent"

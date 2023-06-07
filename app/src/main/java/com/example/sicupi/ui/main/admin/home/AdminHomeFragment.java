@@ -26,6 +26,10 @@ import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentAdminHomeBinding;
 import com.example.sicupi.databinding.FragmentPimpinanHomeBinding;
 import com.example.sicupi.ui.main.admin.adapter.UserAdapter;
+import com.example.sicupi.ui.main.admin.cuti.AdminCutiMelahirkanFragment;
+import com.example.sicupi.ui.main.admin.cuti.AdminCutiPentingFragment;
+import com.example.sicupi.ui.main.admin.cuti.AdminCutikurang14Fragment;
+import com.example.sicupi.ui.main.admin.cuti.AdminCutilebih14Fragment;
 import com.example.sicupi.ui.main.admin.user.AdminInsertPegawaiFragment;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
 import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiMelahirkanFragment;
@@ -94,28 +98,27 @@ public class AdminHomeFragment extends Fragment {
         binding.btnCutiMelahirkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PimpinanHistoryCutiMelahirkanFragment());
+                moveFragment(new AdminCutiMelahirkanFragment());
             }
         });
 
         binding.btnCutiKurang14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PimpinanHistoryCutikurang14Fragment());
+                moveFragment(new AdminCutikurang14Fragment());
             }
         });
-
         binding.btnCutiLebih14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PimpinanHistoryCutilebih14Fragment());
+                moveFragment(new AdminCutilebih14Fragment());
             }
         });
 
         binding.btnCutiPenting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PimpinanHistoryCutiPentingFragment());
+                moveFragment(new AdminCutiPentingFragment());
             }
         });
 
