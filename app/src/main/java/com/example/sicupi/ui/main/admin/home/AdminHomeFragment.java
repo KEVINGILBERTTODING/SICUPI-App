@@ -30,6 +30,7 @@ import com.example.sicupi.ui.main.admin.cuti.AdminCutiMelahirkanFragment;
 import com.example.sicupi.ui.main.admin.cuti.AdminCutiPentingFragment;
 import com.example.sicupi.ui.main.admin.cuti.AdminCutikurang14Fragment;
 import com.example.sicupi.ui.main.admin.cuti.AdminCutilebih14Fragment;
+import com.example.sicupi.ui.main.admin.profile.AdminProfileFragment;
 import com.example.sicupi.ui.main.admin.user.AdminInsertPegawaiFragment;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
 import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiMelahirkanFragment;
@@ -126,16 +127,11 @@ public class AdminHomeFragment extends Fragment {
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PimpinanProfileFragment());
+                moveFragment(new AdminProfileFragment());
             }
         });
 
-        binding.profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveFragment(new PimpinanProfileFragment());
-            }
-        });
+
 
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.sicupi.R;
 import com.example.sicupi.ui.main.admin.home.AdminHomeFragment;
+import com.example.sicupi.ui.main.admin.profile.AdminProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -28,7 +29,8 @@ public class AdminMainActivity extends AppCompatActivity {
                     replace(new AdminHomeFragment());
                     return true;
                 }else if (item.getItemId() == R.id.menuProfile) {
-//                    replace(new );
+                    replace(new AdminProfileFragment());
+                    return true;
                 }
 
                 return false;

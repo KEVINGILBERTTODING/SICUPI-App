@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.admin.profile.AdminProfileFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/wave_main"/>
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            style="@style/DiamondCut"
+            android:layout_height="@dimen/_180sdp">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardCornerRadius="@dimen/_30sdp"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/wave_main">
+
+                    <TextView
+                        android:id="@+id/btnSimpanPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:text="Simpan"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
+
+
+
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile_image"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/profile_template"
+                            app:civ_border_color="@color/white"
+                            app:civ_border_width="2dp" />
+
+
+                        <TextView
+                            android:id="@+id/tvNama"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/popsem"
+                            android:text="Alvina Rizqi"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:id="@+id/tvJabatan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/popmed"
+                            android:text="Staff Umum Keuangan"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_9ssp" />
+
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:layout_below="@id/rlHeader"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popsem"
+                android:text="Menu Profil"
+                android:textColor="@color/black3"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvUbahProfil"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/light_blue"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rvUbahProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/popmed"
+                        android:text="Ubah Profil"
+                        android:textColor="@color/main"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/baseline_keyboard_arrow_right_24"
+                        android:backgroundTint="@color/main"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLogOut"
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/light_blue"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rvLogOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/popmed"
+                        android:text="Keluar"
+                        android:textColor="@color/main"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/baseline_keyboard_arrow_right_24"
+                        android:backgroundTint="@color/main"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popsem"
+                android:text="SICUPI"
+                android:layout_gravity="center"
+                android:textColor="@color/main"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:text="Sistem Cuti Pegawai Non ASN"
+                android:textColor="@color/light_gray"
+                android:textSize="@dimen/_9ssp" />
+
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</layout>
