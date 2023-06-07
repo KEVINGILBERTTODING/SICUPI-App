@@ -18,11 +18,12 @@ import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PimpinanService;
 import com.example.sicupi.data.model.CutiModel;
 import com.example.sicupi.databinding.FragmentPimpinanHomeBinding;
+import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
-import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiLebih14Fragment;
-import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiMelahirkanFragment;
-import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiPentingFragment;
+import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiMelahirkanFragment;
+import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutikurang14Fragment;
+import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutilebih14Fragment;
 import com.example.sicupi.ui.main.pimpinan.profile.PimpinanProfileFragment;
 import com.example.sicupi.util.Constants;
 
@@ -76,7 +77,7 @@ public class PimpinanHomeFragment extends Fragment {
         binding.btnCutiMelahirkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PegawaiHistoryCutiMelahirkanFragment());
+                moveFragment(new PimpinanHistoryCutiMelahirkanFragment());
             }
         });
 
@@ -90,14 +91,14 @@ public class PimpinanHomeFragment extends Fragment {
         binding.btnCutiLebih14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PegawaiHistoryCutiLebih14Fragment());
+                moveFragment(new PimpinanHistoryCutilebih14Fragment());
             }
         });
 
         binding.btnCutiPenting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PegawaiHistoryCutiPentingFragment());
+                moveFragment(new PimpinanHistoryCutiPentingFragment());
             }
         });
 
