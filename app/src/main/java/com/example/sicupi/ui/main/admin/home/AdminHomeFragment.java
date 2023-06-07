@@ -26,6 +26,7 @@ import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentAdminHomeBinding;
 import com.example.sicupi.databinding.FragmentPimpinanHomeBinding;
 import com.example.sicupi.ui.main.admin.adapter.UserAdapter;
+import com.example.sicupi.ui.main.admin.user.AdminInsertPegawaiFragment;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
 import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiMelahirkanFragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutiPentingFragment;
@@ -153,12 +154,19 @@ public class AdminHomeFragment extends Fragment {
 
             }
         });
+
+        binding.fabInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveFragment(new AdminInsertPegawaiFragment());
+            }
+        });
     }
 
 
 
     private void moveFragment(Fragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framePimpinan, fragment)
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAdmin, fragment)
                 .addToBackStack(null).commit();
 
     }
