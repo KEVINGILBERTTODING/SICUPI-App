@@ -10,6 +10,8 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -38,6 +40,20 @@ public interface AdminService {
     Call<ResponseModel> insertPegawai(
             @PartMap Map<String, RequestBody> text
             );
+
+    @Multipart
+    @POST("admin/editPegawai")
+    Call<ResponseModel> editPegawai(
+            @PartMap Map<String, RequestBody> text
+    );
+
+    @FormUrlEncoded
+    @POST("admin/deleteUser")
+    Call<ResponseModel> deletePegawai(
+            @Field("user_id") String userId
+    );
+
+
 
 
 }
