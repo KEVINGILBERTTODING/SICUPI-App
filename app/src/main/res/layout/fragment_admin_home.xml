@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.main.admin.home.AdminHomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/wave_main"
+        android:padding="@dimen/_10sdp"
+        android:layout_height="@dimen/_200sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alvina"
+                android:fontFamily="@font/popmed"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                android:id="@+id/tvUsername"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Staff Persidangan"
+                android:fontFamily="@font/popsem"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp"
+                android:id="@+id/tvEmail"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnCutiKurang14"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/ic_cuti_kurang_14_hari"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Kurang 14"
+                        android:textSize="@dimen/_9ssp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnCutiLebih14"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/ic_cuti_lebih_14_hari"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Lebih 14"
+                        android:textSize="@dimen/_9ssp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnCutiMelahirkan"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/ic_cuti_melahirkan"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Melahirkan"
+                        android:textSize="@dimen/_9ssp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnCutiPenting"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/ic_cuti_alasan_penting"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Penting"
+                        android:textSize="@dimen/_9ssp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_alignParentRight="true"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/white"/>
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/scrollview"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvMenu"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="@dimen/_160sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popmed"
+                        android:text="Cuti Kurang 14 Hari"
+                        android:textColor="@color/black2"
+                        android:textSize="@dimen/_10ssp" />
+
+
+                    <TextView
+                        android:id="@+id/tvKurang14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:text="12"
+                        android:textColor="@color/black2"
+                        android:textSize="@dimen/_16ssp" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="@dimen/_160sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/container_edittext2"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cuti Lebih 14 Hari"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/black2"/>
+
+
+                    <TextView
+                        android:id="@+id/tvLebih14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/black2"/>
+
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="@dimen/_160sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/container_edittext2"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cuti Melahirkan"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/black2"/>
+
+
+                    <TextView
+                        android:id="@+id/tvMelahirkan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/black2"/>
+
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="@dimen/_160sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/container_edittext2"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cuti Alasan Penting"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/black2"/>
+
+
+                    <TextView
+                        android:id="@+id/tvPenting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/black2"/>
+
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/scrollview"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daftar Pegawai"
+            android:layout_below="@+id/cvMenu"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tabLayout"
+            android:background="@color/white"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            tools:listitem="@layout/list_cuti"
+            android:layout_below="@+id/tv2"/>
+
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak ada data."
+            android:layout_below="@+id/cvMenu"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/black3"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
+</layout>

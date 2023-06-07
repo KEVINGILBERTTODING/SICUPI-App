@@ -15,6 +15,7 @@ import com.example.sicupi.R;
 import com.example.sicupi.data.model.AuthModel;
 import com.example.sicupi.data.api.AuthService;
 import com.example.sicupi.data.api.ApiConfig;
+import com.example.sicupi.ui.main.admin.AdminMainActivity;
 import com.example.sicupi.ui.main.pegawai.PegawaiMainActivity;
 import com.example.sicupi.ui.main.pimpinan.PimpinanMainActivity;
 import com.example.sicupi.util.Constants;
@@ -43,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }else if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("2")) {
                 startActivity(new Intent(LoginActivity.this, PimpinanMainActivity.class));
+                finish();
+            }else if (sharedPreferences.getString(Constants.SHAREDPR_ROLE, null).equals("1")) {
+                startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
                 finish();
             }
 
@@ -101,6 +105,16 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(Constants.SHAREDPR_JABATAN, authModel.getJabatan());
                             editor.apply();
                             startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
+                            finish();
+                            Toasty.success(LoginActivity.this, "Selamat datang " + authModel.getNama(), Toasty.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }else if (response.body().getRole() == 1) { // ADMIN
+                            editor.putBoolean(Constants.SHAREDPREF_LOGIN, true);
+                            editor.putString(Constants.SHAREDPRE_USER_ID, authModel.getUserId());
+                            editor.putString(Constants.SHAREDPRE_NAMA, authModel.getNama());
+                            editor.putString(Constants.SHAREDPR_ROLE, String.valueOf(authModel.getRole()));
+                            editor.apply();
+                            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
                             finish();
                             Toasty.success(LoginActivity.this, "Selamat datang " + authModel.getNama(), Toasty.LENGTH_SHORT).show();
                             progressDialog.dismiss();
