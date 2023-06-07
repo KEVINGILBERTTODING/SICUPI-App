@@ -1,22 +1,32 @@
 package com.example.sicupi.ui.main.pimpinan.home;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PimpinanService;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.PimpinanModel;
+import com.example.sicupi.data.model.ResponseModel;
+import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPimpinanHomeBinding;
 import com.example.sicupi.ui.main.pegawai.cuti.PegawaiHistoryCutiPentingFragment;
 import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
@@ -55,6 +65,7 @@ public class PimpinanHomeFragment extends Fragment {
         sharedPreferences = getContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
         pimpinanService = ApiConfig.getClient().create(PimpinanService.class);
+        getMyProfile();
 
 
 
@@ -189,107 +200,41 @@ public class PimpinanHomeFragment extends Fragment {
 
 
 
-//    private void getMyProfile() {
-//        showProgressBar("Loading", "Memuat data...", true);
-//        pegawaiService.getMyProfile(userId).enqueue(new Callback<UserModel>() {
-//            @Override
-//            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    showProgressBar("sds", "adad", false);
-//                    Glide.with(getContext())
-//                            .load(response.body().getFoto())
-//                            .centerCrop()
-//                            .fitCenter()
-//                            .centerInside()
-//                            .skipMemoryCache(true)
-//                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                            .into(binding.profileImage);
-//
-//                    Log.d("foto profile", "onResponse: " + response.body().getFoto());
-//
-//
-//                    // jika ada pemberitahuan cuti disetujui
-//                    // atau cuti ditolak
-//                    if (response.body().getStatusPengajuan().equals("1")){ // jika cuti di setujui
-//                        Dialog dialog = new Dialog(getContext());
-//                        dialog.setContentView(R.layout.layout_alert_disetujui);
-//                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                        Button btnOke = dialog.findViewById(R.id.btnOke);
-//                        dialog.show();
-//                        btnOke.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                pegawaiService.dismissNotif(userId).enqueue(new Callback<ResponseModel>() {
-//                                    @Override
-//                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-//                                        if (response.isSuccessful() && response.body().getStatus() == 200) {
-//                                            dialog.dismiss();
-//                                        }else {
-//                                            showToast("error", "Terjadi kesalahan");
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
-//                                        showToast("error", "Tidak ada koneksi internet");
-//                                    }
-//                                });
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                    }else if (response.body().getStatusPengajuan().equals("2")){
-//                        Dialog dialog = new Dialog(getContext());
-//                        dialog.setContentView(R.layout.layout_alert_ditolak);
-//                        dialog.setCancelable(false);
-//                        dialog.setCanceledOnTouchOutside(false);
-//                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                        Button btnOke = dialog.findViewById(R.id.btnOke);
-//                        dialog.show();
-//
-//                        btnOke.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                pegawaiService.dismissNotif(userId).enqueue(new Callback<ResponseModel>() {
-//                                    @Override
-//                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-//                                        if (response.isSuccessful() && response.body().getStatus() == 200) {
-//                                            dialog.dismiss();
-//                                        }else {
-//                                            showToast("error", "Terjadi kesalahan");
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
-//                                        showToast("error", "Tidak ada koneksi internet");
-//                                    }
-//                                });
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                    }
-//
-//
-//
-//
-//
-//                }else {
-//                    showProgressBar("sds", "adad", false);
-//                    showToast("error", "Gagal memuat data pegawai");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserModel> call, Throwable t) {
-//
-//                showProgressBar("sds", "adad", false);
-//                showToast("error", "Tidak ada koneksi internet");
-//
-//
-//            }
-//        });
-//
-//    }
+    private void getMyProfile() {
+        showProgressBar("Loading", "Memuat data...", true);
+        pimpinanService.getMyProfile(userId).enqueue(new Callback<PimpinanModel>() {
+            @Override
+            public void onResponse(Call<PimpinanModel> call, Response<PimpinanModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showProgressBar("sds", "adad", false);
+                    Glide.with(getContext())
+                            .load(response.body().getFoto())
+                            .centerCrop()
+                            .fitCenter()
+                            .centerInside()
+                            .skipMemoryCache(true)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .into(binding.profileImage);
+
+
+
+                }else {
+                    showProgressBar("sds", "adad", false);
+                    showToast("error", "Gagal memuat data pegawai");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PimpinanModel> call, Throwable t) {
+
+                showProgressBar("sds", "adad", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+
+            }
+        });
+
+    }
 
 
 

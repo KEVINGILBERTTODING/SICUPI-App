@@ -109,12 +109,12 @@ public class PimpinanProfileFragment extends Fragment {
         });
 
 
-//        binding.btnSimpanPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updatePhoto();
-//            }
-//        });
+        binding.btnSimpanPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePhoto();
+            }
+        });
     }
 
     private void getMyProfile() {
@@ -251,32 +251,32 @@ public class PimpinanProfileFragment extends Fragment {
         return result;
     }
 
-//    private void updatePhoto() {
-//        showProgressBar("Loading", "Menyimpan perubahan...", true);
-//        HashMap map = new HashMap();
-//        map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-//        MultipartBody.Part foto = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
-//        pegawaiService.updatePhotoProfile(map, foto).enqueue(new Callback<ResponseModel>() {
-//            @Override
-//            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-//                if (response.isSuccessful() && response.body().getStatus() == 200) {
-//                    showProgressBar("fdsf", "fsdf", false);
-//                    showToast("success", "Berhasil mengubah foto profil");
-//
-//                }else {
-//                    showProgressBar("fdsf", "fsdf", false);
-//                    showToast("error", "Gagal mengubah foto profil");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call <ResponseModel>call, Throwable t) {
-//                showProgressBar("fdsf", "fsdf", false);
-//                showToast("error", "Tidak ada koneksi internet");
-//            }
-//        });
-//    }
+    private void updatePhoto() {
+        showProgressBar("Loading", "Menyimpan perubahan...", true);
+        HashMap map = new HashMap();
+        map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part foto = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
+        pimpinanService.updatePhotoProfile(map, foto).enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.isSuccessful() && response.body().getStatus() == 200) {
+                    showProgressBar("fdsf", "fsdf", false);
+                    showToast("success", "Berhasil mengubah foto profil");
+
+                }else {
+                    showProgressBar("fdsf", "fsdf", false);
+                    showToast("error", "Gagal mengubah foto profil");
+                }
+            }
+
+            @Override
+            public void onFailure(Call <ResponseModel>call, Throwable t) {
+                showProgressBar("fdsf", "fsdf", false);
+                showToast("error", "Tidak ada koneksi internet");
+            }
+        });
+    }
 
     private void writeFile(InputStream inputStream, File file) throws IOException {
         OutputStream outputStream = new FileOutputStream(file);
