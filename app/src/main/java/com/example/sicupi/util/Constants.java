@@ -18,6 +18,7 @@ public class Constants {
 
 
     public static final String URL_PEGAWAI_PHOTO_PROFILE = "http://" + IP_ADDRESS + "/pegawai/assets/data/photo_profile/pegawai/";
+    public static final String URL_PIMPINAN_PHOTO_PROFILE = "http://" + IP_ADDRESS + "/pegawai/assets/data/photo_profile/pimpinan/";
 
 
 

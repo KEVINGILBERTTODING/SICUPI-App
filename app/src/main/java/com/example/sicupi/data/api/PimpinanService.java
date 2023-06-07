@@ -1,6 +1,7 @@
 package com.example.sicupi.data.api;
 
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.PimpinanModel;
 import com.example.sicupi.data.model.ResponseModel;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public interface PimpinanService {
     Call<ResponseModel> setujuCuti(
             @Field("user_id") String userId,
             @Field("cuti_id") String cutiId
+    );
+
+    @GET("pimpinan/getMyProfile")
+    Call<PimpinanModel> getMyProfile(
+            @Query("user_id") String userId
     );
 
 

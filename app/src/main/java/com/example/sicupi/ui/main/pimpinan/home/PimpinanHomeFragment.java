@@ -22,7 +22,7 @@ import com.example.sicupi.ui.main.pimpinan.adapter.AllPengajuanCutiAdapter;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiLebih14Fragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiMelahirkanFragment;
 import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutiPentingFragment;
-import com.example.sicupi.ui.main.pimpinan.cuti.PegawaiHistoryCutikurang14Fragment;
+import com.example.sicupi.ui.main.pimpinan.cuti.PimpinanHistoryCutikurang14Fragment;
 import com.example.sicupi.ui.main.pimpinan.profile.PimpinanProfileFragment;
 import com.example.sicupi.util.Constants;
 
@@ -83,7 +83,7 @@ public class PimpinanHomeFragment extends Fragment {
         binding.btnCutiKurang14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveFragment(new PegawaiHistoryCutikurang14Fragment());
+                moveFragment(new PimpinanHistoryCutikurang14Fragment());
             }
         });
 

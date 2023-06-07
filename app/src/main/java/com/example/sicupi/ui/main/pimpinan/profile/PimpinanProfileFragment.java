@@ -25,7 +25,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sicupi.R;
 import com.example.sicupi.data.api.ApiConfig;
 import com.example.sicupi.data.api.PegawaiService;
+import com.example.sicupi.data.api.PimpinanService;
 import com.example.sicupi.data.model.CutiModel;
+import com.example.sicupi.data.model.PimpinanModel;
 import com.example.sicupi.data.model.ResponseModel;
 import com.example.sicupi.data.model.UserModel;
 import com.example.sicupi.databinding.FragmentPegawaiProfileBinding;
@@ -53,7 +55,7 @@ public class PimpinanProfileFragment extends Fragment {
     private FragmentPimpinanProfileBinding binding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    PegawaiService pegawaiService;
+    PimpinanService pimpinanService;
     AlertDialog progressDialog;
     String userId;
     private File file;
@@ -67,7 +69,7 @@ public class PimpinanProfileFragment extends Fragment {
         sharedPreferences = getContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constants.SHAREDPRE_USER_ID, null);
         editor = sharedPreferences.edit();
-        pegawaiService = ApiConfig.getClient().create(PegawaiService.class);
+        pimpinanService = ApiConfig.getClient().create(PimpinanService.class);
 
 
         return binding.getRoot();
@@ -107,19 +109,19 @@ public class PimpinanProfileFragment extends Fragment {
         });
 
 
-        binding.btnSimpanPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updatePhoto();
-            }
-        });
+//        binding.btnSimpanPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                updatePhoto();
+//            }
+//        });
     }
 
     private void getMyProfile() {
         showProgressBar("Loading", "Memuat data...", true);
-        pegawaiService.getMyProfile(userId).enqueue(new Callback<UserModel>() {
+        pimpinanService.getMyProfile(userId).enqueue(new Callback<PimpinanModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(Call<PimpinanModel> call, Response<PimpinanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     showProgressBar("sds", "adad", false);
                     binding.tvNama.setText(response.body().getNama());
@@ -143,7 +145,7 @@ public class PimpinanProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(Call<PimpinanModel> call, Throwable t) {
 
                 showProgressBar("sds", "adad", false);
                 showToast("error", "Tidak ada koneksi internet");
@@ -249,32 +251,32 @@ public class PimpinanProfileFragment extends Fragment {
         return result;
     }
 
-    private void updatePhoto() {
-        showProgressBar("Loading", "Menyimpan perubahan...", true);
-        HashMap map = new HashMap();
-        map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part foto = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
-        pegawaiService.updatePhotoProfile(map, foto).enqueue(new Callback<ResponseModel>() {
-            @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                if (response.isSuccessful() && response.body().getStatus() == 200) {
-                    showProgressBar("fdsf", "fsdf", false);
-                    showToast("success", "Berhasil mengubah foto profil");
-
-                }else {
-                    showProgressBar("fdsf", "fsdf", false);
-                    showToast("error", "Gagal mengubah foto profil");
-                }
-            }
-
-            @Override
-            public void onFailure(Call <ResponseModel>call, Throwable t) {
-                showProgressBar("fdsf", "fsdf", false);
-                showToast("error", "Tidak ada koneksi internet");
-            }
-        });
-    }
+//    private void updatePhoto() {
+//        showProgressBar("Loading", "Menyimpan perubahan...", true);
+//        HashMap map = new HashMap();
+//        map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+//        MultipartBody.Part foto = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
+//        pegawaiService.updatePhotoProfile(map, foto).enqueue(new Callback<ResponseModel>() {
+//            @Override
+//            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+//                if (response.isSuccessful() && response.body().getStatus() == 200) {
+//                    showProgressBar("fdsf", "fsdf", false);
+//                    showToast("success", "Berhasil mengubah foto profil");
+//
+//                }else {
+//                    showProgressBar("fdsf", "fsdf", false);
+//                    showToast("error", "Gagal mengubah foto profil");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call <ResponseModel>call, Throwable t) {
+//                showProgressBar("fdsf", "fsdf", false);
+//                showToast("error", "Tidak ada koneksi internet");
+//            }
+//        });
+//    }
 
     private void writeFile(InputStream inputStream, File file) throws IOException {
         OutputStream outputStream = new FileOutputStream(file);

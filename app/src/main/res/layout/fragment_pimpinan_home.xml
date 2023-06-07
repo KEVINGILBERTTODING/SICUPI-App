@@ -157,10 +157,10 @@
             android:text="Daftar Pengajuan Cuti"
             android:layout_below="@+id/cvMenu"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/popsem"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/black3"/>
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCuti"

@@ -20,6 +20,7 @@ import com.example.sicupi.R;
 import com.example.sicupi.data.model.CutiModel;
 import com.example.sicupi.util.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAdapter.ViewHolder> {
@@ -34,7 +35,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_cuti, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.list_cuti_pimpinan, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,6 +44,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
         holder.tvJenisCuti.setText(cutiModelList.get(holder.getAdapterPosition()).getKeterangan());
         holder.tvMulai.setText(cutiModelList.get(holder.getAdapterPosition()).getMulaiCuti());
         holder.tvSelesai.setText(cutiModelList.get(holder.getAdapterPosition()).getAkhirCuti());
+        holder.tvNama.setText(cutiModelList.get(holder.getAdapterPosition()).getNama());
 
 
 
@@ -61,10 +63,15 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
         return cutiModelList.size();
     }
 
+    public void filter(ArrayList<CutiModel> filteredList) {
+        cutiModelList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvJenisCuti, tvMulai, tvSelesai;
+        TextView tvJenisCuti, tvMulai, tvSelesai, tvNama;
         ImageView icStatus;
         LinearLayout lrPerihal;
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +80,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
             tvMulai = itemView.findViewById(R.id.tvMulaiCuti);
             tvSelesai = itemView.findViewById(R.id.tvSelesaiCuti);
             icStatus = itemView.findViewById(R.id.icStatus);
+            tvNama = itemView.findViewById(R.id.tvNama);
             lrPerihal = itemView.findViewById(R.id.linar_perihal);
 
             itemView.setOnClickListener(this);
@@ -81,11 +89,11 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
         @Override
         public void onClick(View v) {
             Dialog dialog = new Dialog(context);
-            dialog.setContentView(R.layout.layout_detail_cuti);
+            dialog.setContentView(R.layout.layout_detail_cuti_history_pimpinan);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             TextView tvJenisCuti, tvStatusCuti, tvTanggalMulai, tvTanggalSelesai, tvPerihal;
             CardView cvStatus;
-            Button btnDownloadLampiran, btnDownloadLaporan;
+            Button btnDownloadLampiran;
             tvJenisCuti = dialog.findViewById(R.id.tvJenisCuti);
             tvStatusCuti = dialog.findViewById(R.id.tvStatus);
             tvTanggalMulai = dialog.findViewById(R.id.tvTglAwal);
@@ -93,7 +101,6 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
             tvPerihal = dialog.findViewById(R.id.tvPerihal);
             cvStatus = dialog.findViewById(R.id.cvCutiStatus);
             btnDownloadLampiran = dialog.findViewById(R.id.btnDownloadLampiran);
-            btnDownloadLaporan = dialog.findViewById(R.id.btnDownloadLaporan);
 
             tvJenisCuti.setText(cutiModelList.get(getAdapterPosition()).getKeterangan());
             tvTanggalMulai.setText(cutiModelList.get(getAdapterPosition()).getMulaiCuti());
@@ -109,12 +116,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Sakit > 14")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -124,12 +126,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_SAKIT_14 + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Melahirkan")) {
 
               btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
@@ -140,12 +137,7 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                       );
                   }
               });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_MELAHIRKAN + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+
             }else  if (cutiModelList.get(getAdapterPosition()).getKeterangan().equals("Cuti Alasan Penting")) {
                 btnDownloadLampiran.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -155,25 +147,20 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
                         );
                     }
                 });
-                btnDownloadLaporan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        downloadSuratCuti(Constants.URLF_DONWLOAD_LAPORAN_CUTI_PENTING + cutiModelList.get(getAdapterPosition()).getCutiId());
-                    }
-                });
+
             }
 
             if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(1)) {
                 tvStatusCuti.setText("Disetujui");
-                btnDownloadLaporan.setVisibility(View.VISIBLE);
+
                 cvStatus.setCardBackgroundColor(context.getColor(R.color.green));
             } else if (cutiModelList.get(getAdapterPosition()).getVerifikasi().equals(2)) {
                 tvStatusCuti.setText("Ditolak");
-                btnDownloadLaporan.setVisibility(View.GONE);
+
                 cvStatus.setCardBackgroundColor(context.getColor(R.color.red));
             }else {
                 tvStatusCuti.setText("Diproses");
-                btnDownloadLaporan.setVisibility(View.GONE);
+
                 cvStatus.setCardBackgroundColor(context.getColor(R.color.yellow));
             }
 
@@ -189,11 +176,6 @@ public class HistoryAllCutiAdapter extends RecyclerView.Adapter<HistoryAllCutiAd
 
     private void downloadSuratLampiran(String cutiId, String jenis) {
         String url = Constants.URLF_DONWLOAD_LAMPIRAN_CUTI + "/" + cutiId + "/" + jenis;
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        context.startActivity(intent);
-    }
-    private void downloadSuratCuti(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
