@@ -4,78 +4,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="20dp"
     android:layout_height="match_parent"
-    android:background="@color/main"
+    android:background="@drawable/bg_login"
     tools:context=".ui.main.auth.LoginActivity">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        app:cardCornerRadius="15dp"
-        android:layout_height="wrap_content"
-        app:contentPadding="20dp">
 
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="@font/popsem"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
+            android:text="Masuk"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/popmed"
+            android:textSize="@dimen/_11ssp"
+            android:text="Silahkan Masukkan Email dan Password Anda"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/black"
+            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+            app:boxCornerRadiusTopStart="@dimen/_10sdp">
 
-            <ImageView
-                android:layout_width="130dp"
-                android:layout_height="120dp"
-                android:src="@drawable/main_logo"
-                android:layout_gravity="center_horizontal"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/black2"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/popsem"
-                android:layout_gravity="center_horizontal"
-                android:text="Sistem Cuti Pegawai Non ASN"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/black2"
-                android:fontFamily="@font/popsem"
-                android:text="Silahkan masukan Email dan Password dibawah ini :
-"/>
-
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Email"
-                android:textSize="15sp"
                 android:fontFamily="@font/popmed"
-                android:padding="11dp"
-                android:background="@drawable/container_edittext1"/>
+                android:hint="Email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/black"
+            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+            app:passwordToggleEnabled="true"
+            app:boxCornerRadiusTopStart="@dimen/_10sdp">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:fontFamily="@font/popmed"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:fontFamily="@font/popmed"
-                android:padding="11dp"
-                android:textSize="15sp"
-                android:background="@drawable/container_edittext1"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:layout_marginTop="20dp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+    </LinearLayout>
+
+
+
+
 
 </RelativeLayout>

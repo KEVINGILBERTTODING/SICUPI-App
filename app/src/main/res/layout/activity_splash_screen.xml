@@ -26,26 +26,26 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:fontFamily="@font/popsem"
-            android:textSize="13dp"/>
+            android:textSize="@dimen/_11ssp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sistem Cuti Pegawai Non ASN"
             android:textColor="@color/white"
-            android:fontFamily="@font/popsem"
-            android:textSize="13dp"/>
+            android:fontFamily="@font/popmed"
+            android:textSize="@dimen/_9ssp"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DRPRD Jawa Tengah"
+        android:text="DPRD Jawa Tengah"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/popmed"
-        android:textSize="11dp"/>
+        android:textSize="@dimen/_9ssp"/>
 
 </RelativeLayout>
