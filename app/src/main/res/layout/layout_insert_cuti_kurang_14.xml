@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:text="Pengajuan Cuti Kurang dari 14 Hari"
                 android:fontFamily="@font/popsem"
+                android:id="@+id/titleCuti"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp"

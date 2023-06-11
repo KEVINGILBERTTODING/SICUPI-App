@@ -158,10 +158,12 @@ public class PegawaiHistoryCutiLebih14Fragment extends Fragment {
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.setCancelable(false);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                TextView tvWaktuMulai, tvWaktuSelesai;
+                TextView tvWaktuMulai, tvWaktuSelesai, tvTitleCuti;
                 EditText etPerihal = dialog.findViewById(R.id.etPerihal);
                 Button btnSubmit, btnPdfPicker;
                 btnSubmit = dialog.findViewById(R.id.btnSubmit);
+                tvTitleCuti = dialog.findViewById(R.id.titleCuti);
+                tvTitleCuti.setText("Pengajuan Cuti Lebih dari 14 Hari");
                 tvWaktuMulai = dialog.findViewById(R.id.tvWaktuMulai);
                 tvWaktuSelesai = dialog.findViewById(R.id.tvWaktuSelesai);
                 etPdfPath = dialog.findViewById(R.id.etPdfPath);

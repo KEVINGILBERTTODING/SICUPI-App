@@ -158,8 +158,10 @@ public class PegawaiHistoryCutiPentingFragment extends Fragment {
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.setCancelable(false);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                TextView tvWaktuMulai, tvWaktuSelesai;
+                TextView tvWaktuMulai, tvWaktuSelesai, tvTitleCuti;
                 EditText etPerihal = dialog.findViewById(R.id.etPerihal);
+                tvTitleCuti = dialog.findViewById(R.id.titleCuti);
+                tvTitleCuti.setText("Pengajuan Cuti Lebih Alasan Penting");
                 Button btnSubmit, btnPdfPicker;
                 btnSubmit = dialog.findViewById(R.id.btnSubmit);
                 tvWaktuMulai = dialog.findViewById(R.id.tvWaktuMulai);

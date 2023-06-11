@@ -411,6 +411,8 @@ public class PegawaiHomeFragment extends Fragment {
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .into(binding.profileImage);
 
+                    binding.tvJabatan.setText(response.body().getJabatan());
+
                     Log.d("foto profile", "onResponse: " + response.body().getFoto());
 
 
