@@ -72,7 +72,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/popsem"
-                            android:text="Alvina Rizqi"
+
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12ssp" />
 
@@ -82,7 +82,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/popmed"
-                            android:text="Staff Umum Keuangan"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_9ssp" />
 
