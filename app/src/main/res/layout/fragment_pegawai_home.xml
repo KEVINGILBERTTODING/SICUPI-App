@@ -20,7 +20,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alvina"
                 android:fontFamily="@font/popmed"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_8ssp"
@@ -29,7 +28,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Staff Persidangan"
                 android:fontFamily="@font/popsem"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp"
@@ -169,7 +167,6 @@
                 android:id="@+id/tvJenisCuti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cuti Melahirkan"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/popsem"
@@ -226,7 +223,6 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_toRightOf="@id/ivCalendar1"
                         android:fontFamily="@font/popmed"
-                        android:text="2023-02-20"
                         android:textSize="@dimen/_11ssp" />
                 </RelativeLayout>
 
@@ -261,7 +257,6 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_toRightOf="@id/ivCalendar2"
                         android:fontFamily="@font/popmed"
-                        android:text="2023-02-20"
                         android:textSize="@dimen/_11ssp" />
                 </RelativeLayout>
             </GridLayout>

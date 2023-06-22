@@ -22,7 +22,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alvina"
                 android:fontFamily="@font/popmed"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_8ssp"
@@ -31,7 +30,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Staff Persidangan"
                 android:fontFamily="@font/popsem"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp"
@@ -189,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:fontFamily="@font/popsem"
-                        android:text="12"
+
                         android:textColor="@color/black2"
                         android:textSize="@dimen/_16ssp" />
 
@@ -225,7 +223,7 @@
                         android:id="@+id/tvLebih14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12"
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:fontFamily="@font/popsem"
                         android:textSize="@dimen/_16ssp"
@@ -264,7 +262,7 @@
                         android:id="@+id/tvMelahirkan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12"
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:fontFamily="@font/popsem"
                         android:textSize="@dimen/_16ssp"
@@ -304,7 +302,7 @@
                         android:id="@+id/tvPenting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12"
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:fontFamily="@font/popsem"
                         android:textSize="@dimen/_16ssp"

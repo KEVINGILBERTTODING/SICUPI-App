@@ -20,7 +20,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alvina"
                 android:fontFamily="@font/popmed"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_8ssp"
@@ -29,7 +28,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Staff Persidangan"
                 android:fontFamily="@font/popsem"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp"
