@@ -67,6 +67,7 @@ public class PegawaiHistoryCutiLebih14Fragment extends Fragment {
     private AlertDialog progressDialog;
     String userId;
     HistoryAllCutiAdapter historyAllCutiAdapter;
+    private Boolean totalCuti;
     List<CutiModel> cutiModelList;
     LinearLayoutManager linearLayoutManager;
     PegawaiService pegawaiService;
@@ -93,6 +94,7 @@ public class PegawaiHistoryCutiLebih14Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getData("Cuti Sakit > 14");
+        checkTotalCuti();
 
         listener();
 
@@ -145,8 +147,9 @@ public class PegawaiHistoryCutiLebih14Fragment extends Fragment {
         binding.fabInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (cuti.equals("2")) { // ada cuti lagi di proses
+                if (totalCuti == false) {
+                    showDialogWarning("Jumlah cuti anda pada tahun ini sudah melebihi batas maksimal, mohon menunggu sampai tahun depan.");
+                }else if (cuti.equals("2")) { // ada cuti lagi di proses
                     showDialogWarning("Anda telah mengajukan cuti, mohon menunggu verifikasi dari admin.");
                 }else if (cuti.equals("1")) { // sedang dalam massa cuti
                     showDialogWarning("Status cuti anda masih aktif, mohon menunggu sampai masa cuti selesai.");
@@ -315,6 +318,45 @@ public class PegawaiHistoryCutiLebih14Fragment extends Fragment {
             }
         });
         datePickerDialog.show();
+    }
+
+    // function untuk menghitung jumlah cuti
+
+    private void checkTotalCuti() {
+        showProgressBar("Loading", "Memuat data...", true);
+        pegawaiService.verifiedTotalCuti(userId).enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                showProgressBar("s", "s", false);
+                if (response.isSuccessful() && response.body() != null) {
+                    Integer jumlahCuti = Integer.parseInt(response.body().getMessage());
+                    if (jumlahCuti > 11) {
+                        totalCuti = false;
+                    }else {
+
+                        totalCuti = true;
+
+                    }
+
+
+
+                }else {
+                    showToast("err", "Terjadi kesalahan");
+                    binding.fabInsert.setEnabled(false);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                showProgressBar("s", "s", false);
+                showToast("err", "Tidak ada koneksi internet");
+                binding.fabInsert.setEnabled(false);
+
+
+
+            }
+        });
     }
 
     private void getMyProfile() {

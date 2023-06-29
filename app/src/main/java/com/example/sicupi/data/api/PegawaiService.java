@@ -107,6 +107,11 @@ public interface PegawaiService {
             @Part MultipartBody.Part file
     );
 
+    @GET("pegawai/checkTotalCuti")
+    Call<ResponseModel> verifiedTotalCuti(
+            @Query("kode_pegawai") String kodePegawai
+    );
+
 
 
 
