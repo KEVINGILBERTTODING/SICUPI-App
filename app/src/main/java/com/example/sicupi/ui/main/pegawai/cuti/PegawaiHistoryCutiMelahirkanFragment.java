@@ -355,13 +355,13 @@ public class PegawaiHistoryCutiMelahirkanFragment extends Fragment {
 
     private void checkTotalCuti() {
         showProgressBar("Loading", "Memuat data...", true);
-        pegawaiService.verifiedTotalCuti(userId).enqueue(new Callback<ResponseModel>() {
+        pegawaiService.verifiedTotalCutiMelahirkan(userId).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 showProgressBar("s", "s", false);
                 if (response.isSuccessful() && response.body() != null) {
                     Integer jumlahCuti = Integer.parseInt(response.body().getMessage());
-                    if (jumlahCuti > 11) {
+                    if (jumlahCuti > 1) {
                         totalCuti = false;
                     }else {
 

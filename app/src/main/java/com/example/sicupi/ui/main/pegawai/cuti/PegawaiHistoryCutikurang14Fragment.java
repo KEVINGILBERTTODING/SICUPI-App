@@ -419,13 +419,16 @@ public class PegawaiHistoryCutikurang14Fragment extends Fragment {
             }
         }
     }
-        private void showToast(String jenis, String text) {
+
+
+    private void showToast(String jenis, String text) {
+
         if (jenis.equals("success")) {
             Toasty.success(getContext(), text, Toasty.LENGTH_SHORT).show();
         }else {
             Toasty.error(getContext(), text, Toasty.LENGTH_SHORT).show();
         }
-        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -512,7 +515,6 @@ public class PegawaiHistoryCutikurang14Fragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
 
     }
 }

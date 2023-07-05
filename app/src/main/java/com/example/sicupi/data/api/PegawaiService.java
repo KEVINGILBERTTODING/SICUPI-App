@@ -112,6 +112,13 @@ public interface PegawaiService {
             @Query("kode_pegawai") String kodePegawai
     );
 
+    @GET("pegawai/checkTotalCutiMelahirkan")
+    Call<ResponseModel> verifiedTotalCutiMelahirkan(
+            @Query("kode_pegawai") String kodePegawai
+    );
+
+
+
 
 
 
