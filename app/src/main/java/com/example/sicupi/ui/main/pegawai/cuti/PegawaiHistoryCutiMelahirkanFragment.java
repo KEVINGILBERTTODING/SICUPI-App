@@ -361,7 +361,7 @@ public class PegawaiHistoryCutiMelahirkanFragment extends Fragment {
                 showProgressBar("s", "s", false);
                 if (response.isSuccessful() && response.body() != null) {
                     Integer jumlahCuti = Integer.parseInt(response.body().getMessage());
-                    if (jumlahCuti > 1) {
+                    if (jumlahCuti >= 1) {
                         totalCuti = false;
                     }else {
 
