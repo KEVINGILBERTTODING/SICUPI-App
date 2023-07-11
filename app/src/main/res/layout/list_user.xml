@@ -25,6 +25,15 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvKodePegawai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alvina Rizqi"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/_10ssp"
+                    android:fontFamily="@font/popsem"/>
                 <TextView
                     android:id="@+id/tvNama"
                     android:layout_width="wrap_content"

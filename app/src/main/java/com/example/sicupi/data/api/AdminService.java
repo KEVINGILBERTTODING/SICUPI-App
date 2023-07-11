@@ -79,6 +79,9 @@ public interface AdminService {
             @Part MultipartBody.Part file
     );
 
+    @GET("admin/getIdPegawai")
+    Call<UserModel> getIdPegawai();
+
 
 
 

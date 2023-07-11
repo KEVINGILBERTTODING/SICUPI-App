@@ -70,6 +70,7 @@ public class AdminInsertPegawaiFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getKodePegawai();
 
        listener();
 
@@ -206,6 +207,28 @@ public class AdminInsertPegawaiFragment extends Fragment {
         });
 
 
+    }
+    private void getKodePegawai() {
+        showProgressBar("Loading", "Memuat data...", true);
+        adminService.getIdPegawai().enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                showProgressBar("", "", false);
+                if (response.isSuccessful() && response.body().getKodePegawai() != null) {
+                    binding.etKodePegawai.setText(response.body().getKodePegawai());
+
+                }else {
+                    showToast("err", "Terjadi kesalahan");
+                    binding.btnSimpan.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                showProgressBar("", "", false);
+                showToast("err", "Tidak ada koneksi internet");
+            }
+        });
     }
 
 }

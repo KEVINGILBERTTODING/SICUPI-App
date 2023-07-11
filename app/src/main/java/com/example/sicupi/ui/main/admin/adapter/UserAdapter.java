@@ -39,6 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
         holder.tvNama.setText(userModelList.get(holder.getAdapterPosition()).getNama());
         holder.tvJabatan.setText(userModelList.get(holder.getAdapterPosition()).getJabatan());
+        holder.tvKodePegawai.setText(userModelList.get(holder.getAdapterPosition()).getKodePegawai());
 
     }
 
@@ -53,11 +54,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView tvNama, tvJabatan;
+        TextView tvNama, tvJabatan, tvKodePegawai;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNama = itemView.findViewById(R.id.tvNama);
             tvJabatan = itemView.findViewById(R.id.tvJabatan);
+            tvKodePegawai = itemView.findViewById(R.id.tvKodePegawai);
             itemView.setOnClickListener(this::onClick);
         }
 
