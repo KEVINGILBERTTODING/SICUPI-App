@@ -53,7 +53,7 @@ public class PegawaiHomeFragment extends Fragment {
     List<CutiModel> cutiModelList;
     LinearLayoutManager linearLayoutManager;
     HistoryAllCutiAdapter historyAllCutiAdapter;
-    String userId;
+    String userId, kodePegawai;
     PegawaiService pegawaiService;
     AlertDialog progressDialog;
 
@@ -83,6 +83,7 @@ public class PegawaiHomeFragment extends Fragment {
         getAllCuti();
         getShowCutiAktif();
         listener();
+        getKuotaCuti();
 
     }
 
@@ -169,6 +170,34 @@ public class PegawaiHomeFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void getKuotaCuti() {
+        showProgressBar("Loading", "Memuat data...", true);
+        pegawaiService.getKuotaCuti(kodePegawai).enqueue(new Callback<List<CutiModel>>() {
+            @Override
+            public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
+                showProgressBar("", "", false);
+                if (response.isSuccessful() && response.body().size() > 0) {
+                    Integer totalCuti = Integer.parseInt(String.valueOf(response.body().size()));
+                    binding.tvKuotaCuti.setText(12 - totalCuti + "Cuti Tersisa");
+
+                }else {
+                    binding.tvKuotaCuti.setText("12 Cuti Tersisa");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CutiModel>> call, Throwable t) {
+                showProgressBar("", "", false);
+                showToast("err", "Gagal memuat kuota cuti");
+                binding.tvKuotaCuti.setText("Gagal");
+
+
+            }
+        });
 
     }
 
@@ -412,8 +441,8 @@ public class PegawaiHomeFragment extends Fragment {
                             .into(binding.profileImage);
 
                     binding.tvJabatan.setText(response.body().getJabatan());
-
-                    Log.d("foto profile", "onResponse: " + response.body().getFoto());
+                    binding.tvKodePegawai.setText(response.body().getKodePegawai());
+                    kodePegawai = response.body().getKodePegawai();
 
 
                     // jika ada pemberitahuan cuti disetujui

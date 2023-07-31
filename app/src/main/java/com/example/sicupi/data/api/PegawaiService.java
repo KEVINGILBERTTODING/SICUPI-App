@@ -118,6 +118,12 @@ public interface PegawaiService {
     );
 
 
+    @GET("pegawai/getKuotaCuti")
+    Call<List<CutiModel>> getKuotaCuti(
+            @Query("kode_pegawai") String kodePegawai
+    );
+
+
 
 
 
